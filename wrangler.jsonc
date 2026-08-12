@@ -1,0 +1,36 @@
+/**
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "pyrearms",
+	"main": "worker/index.ts",
+	"compatibility_date": "2026-08-11",
+	"compatibility_flags": ["nodejs_compat"],
+	"workers_dev": true,
+	"routes": [
+		{ "pattern": "pyrearms.dev", "custom_domain": true },
+		{ "pattern": "www.pyrearms.dev", "custom_domain": true }
+	],
+	"assets": {
+		"not_found_handling": "single-page-application",
+		"run_worker_first": ["/api/*"]
+	},
+	"observability": {
+		"enabled": true
+	},
+	"upload_source_maps": true,
+	"vars": {
+		"PUBLIC_APP_NAME": "PyreArms",
+		"PUBLIC_APP_URL": "https://pyrearms.dev"
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "pyrearms",
+			"database_id": "4a9bca26-e483-42c9-8391-328c13a23ada",
+			"migrations_dir": "migrations"
+		}
+	]
+}

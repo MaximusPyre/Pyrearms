@@ -1,0 +1,6 @@
+ADMIN_PASSWORD=change-me
+SESSION_SECRET=change-me-long-random
+PUBLIC_APP_URL=http://localhost:5173
+
+
+CONNECT_ORACLE_ID=

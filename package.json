@@ -1,0 +1,37 @@
+{
+  "name": "pyrearms",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "PyreArms — federal PMF law education + PyreLink P2P advocacy client",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint",
+    "preview": "npm run build && vite preview",
+    "deploy": "npm run build && wrangler deploy",
+    "cf-typegen": "wrangler types",
+    "db:migrate:local": "wrangler d1 migrations apply pyrearms --local",
+    "db:migrate:remote": "wrangler d1 migrations apply pyrearms --remote",
+    "dev:setup": "wrangler d1 migrations apply pyrearms --local",
+    "sync:downloads": "mkdir -p public/downloads && cp -f app/src-tauri/target/release/pyrelink public/downloads/PyreLink && cp -f app/src-tauri/target/release/pyrelink public/downloads/PyreLink.AppImage && cp -f app/src-tauri/target/release/bundle/deb/PyreLink_*_amd64.deb public/downloads/pyrelink_amd64.deb && chmod +x public/downloads/PyreLink public/downloads/PyreLink.AppImage"
+  },
+  "dependencies": {
+    "hono": "^4.13.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-router-dom": "^7.18.2"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.51.2",
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@types/react-router-dom": "^5.3.3",
+    "@vitejs/plugin-react": "^6.0.4",
+    "oxlint": "^1.75.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.2.0",
+    "wrangler": "^4.120.1"
+  }
+}
