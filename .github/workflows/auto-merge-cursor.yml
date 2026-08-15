@@ -1,0 +1,22 @@
+name: Auto-merge Cursor PRs
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  merge:
+    if: github.event.pull_request.user.login == 'cursor[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mark ready and squash-merge
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          gh pr ready "$PR" --repo "${{ github.repository }}" || true
+          gh pr merge "$PR" --repo "${{ github.repository }}" --squash --delete-branch
