@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { BetaCallout } from "../components/BetaCallout";
 import { LAW_BLOG } from "../data/lawBlog";
 import { PMF_AS_OF } from "../data/pmfStates";
+import { X_HANDLE, X_URL } from "../lib/social";
 
 export function Blog() {
 	return (
@@ -13,6 +15,8 @@ export function Blog() {
 					Map as of {PMF_AS_OF}. Education, not legal advice.
 				</p>
 			</div>
+
+			<BetaCallout />
 
 			<div className="prose">
 				{LAW_BLOG.length === 0 ? (
@@ -38,12 +42,8 @@ export function Blog() {
 				<p>
 					<Link to="/law">Open the state map</Link>
 					{" · "}
-					<a
-						href="https://x.com/maximuspyre"
-						target="_blank"
-						rel="noreferrer"
-					>
-						Beta testers: @maximuspyre on X
+					<a href={X_URL} target="_blank" rel="noreferrer">
+						3D2A testers: {X_HANDLE} on X
 					</a>
 				</p>
 			</div>

@@ -1,4 +1,5 @@
 import { StatePmfMap } from "../components/StatePmfMap";
+import { X_HANDLE, X_URL } from "../lib/social";
 
 export function Legal() {
 	return (
@@ -9,7 +10,11 @@ export function Legal() {
 				<p className="lede">
 					Primary federal authorities for privately made firearms, then a dated
 					fifty-state status map. This is statute discussion for education — not
-					legal advice.
+					legal advice. 3D2A testers:{" "}
+					<a href={X_URL} target="_blank" rel="noreferrer">
+						{X_HANDLE}
+					</a>
+					.
 				</p>
 			</div>
 

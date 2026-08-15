@@ -1,3 +1,6 @@
+import { BetaCallout } from "../components/BetaCallout";
+import { X_HANDLE, X_URL } from "../lib/social";
+
 const GITHUB = "https://github.com/MaximusPyre/Pyrearms";
 const RELEASE = `${GITHUB}/releases/tag/v0.1.0`;
 const ASSET = (name: string) =>
@@ -14,6 +17,8 @@ export function Download() {
 					media, others fetch while you stay online.
 				</p>
 			</div>
+
+			<BetaCallout />
 
 			<div className="prose">
 				<p>
@@ -84,11 +89,11 @@ export function Download() {
 				</ul>
 
 				<p>
-					Want to test betas? Message{" "}
-					<a href="https://x.com/maximuspyre" target="_blank" rel="noreferrer">
-						@maximuspyre
+					Windows / macOS builds and new PyreLink betas: DM{" "}
+					<a href={X_URL} target="_blank" rel="noreferrer">
+						{X_HANDLE}
 					</a>{" "}
-					on X.
+					on X for 3D2A testing.
 				</p>
 
 				<p className="fine-print">

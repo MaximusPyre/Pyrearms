@@ -126,6 +126,57 @@ a:hover {
 	color: var(--ember);
 }
 
+.nav-x {
+	color: var(--molten) !important;
+	border: 1px solid var(--line);
+	padding: 0.28rem 0.65rem;
+	border-radius: 999px;
+	background: rgba(196, 55, 28, 0.18);
+}
+
+.nav-x:hover {
+	color: #ffc06a !important;
+	background: rgba(196, 55, 28, 0.32);
+}
+
+.beta-callout {
+	max-width: 42rem;
+	margin: 0 auto 1.75rem;
+	padding: 1rem 1.25rem;
+	border: 1px solid var(--line);
+	background: linear-gradient(
+		180deg,
+		rgba(196, 55, 28, 0.22),
+		rgba(8, 3, 2, 0.9)
+	);
+	text-align: center;
+}
+
+.beta-callout .eyebrow {
+	margin: 0 0 0.35rem;
+}
+
+.beta-callout p:last-child {
+	margin: 0;
+	font-size: 1.05rem;
+}
+
+.beta-callout a {
+	font-weight: 700;
+	letter-spacing: 0.04em;
+}
+
+.hero-copy .beta-callout {
+	margin-top: 1.25rem;
+	margin-bottom: 0;
+}
+
+.beta-callout-compact {
+	max-width: 28rem;
+	padding: 0.75rem 1rem;
+	background: rgba(0, 0, 0, 0.55);
+}
+
 .nav-admin {
 	opacity: 0.55;
 }

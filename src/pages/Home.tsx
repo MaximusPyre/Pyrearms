@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Embers } from "../components/Embers";
+import { X_HANDLE, X_URL } from "../lib/social";
 
 export function Home() {
 	return (
@@ -32,6 +33,14 @@ export function Home() {
 						<Link className="btn btn-ghost" to="/download">
 							Get PyreLink
 						</Link>
+						<a
+							className="btn btn-primary"
+							href={X_URL}
+							target="_blank"
+							rel="noreferrer"
+						>
+							3D2A testers · {X_HANDLE}
+						</a>
 					</div>
 				</div>
 			</section>
