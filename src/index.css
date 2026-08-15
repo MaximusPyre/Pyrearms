@@ -654,6 +654,16 @@ a:hover {
 	padding: 0;
 }
 
+.law-post {
+	margin-bottom: 2rem;
+	padding-bottom: 1.25rem;
+	border-bottom: 1px solid rgba(120, 30, 12, 0.28);
+}
+
+.law-post h2 {
+	margin: 0.35rem 0 0.75rem;
+}
+
 /* Footer */
 .site-footer {
 	padding: 2.5rem clamp(1.25rem, 4vw, 2.5rem) 3rem;

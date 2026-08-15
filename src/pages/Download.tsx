@@ -83,6 +83,14 @@ export function Download() {
 					</li>
 				</ul>
 
+				<p>
+					Want to test betas? Message{" "}
+					<a href="https://x.com/maximuspyre" target="_blank" rel="noreferrer">
+						@maximuspyre
+					</a>{" "}
+					on X.
+				</p>
+
 				<p className="fine-print">
 					MIT licensed. Protocol notes in the repo. Follow U.S. federal and your
 					local law — see our <a href="/law">law page</a> and{" "}

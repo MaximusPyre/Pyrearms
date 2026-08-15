@@ -189,7 +189,8 @@ export function Legal() {
 						as never having had one).
 					</li>
 					<li>
-						State overlays can be stricter than federal baseline — see the map.
+						State overlays can be stricter than federal baseline — see the map
+						and the <a href="/blog">law watch</a> log.
 					</li>
 				</ul>
 

@@ -4,6 +4,7 @@ import { Nav } from "./components/Nav";
 import { AdminConnect } from "./pages/AdminConnect";
 import { Download } from "./pages/Download";
 import { Home } from "./pages/Home";
+import { Blog } from "./pages/Blog";
 import { Legal } from "./pages/Legal";
 import { Story } from "./pages/Story";
 import "./index.css";
@@ -18,6 +19,7 @@ export default function App() {
 						<Route path="/" element={<Home />} />
 						<Route path="/story" element={<Story />} />
 						<Route path="/law" element={<Legal />} />
+						<Route path="/blog" element={<Blog />} />
 						<Route path="/legal" element={<Navigate to="/law" replace />} />
 						<Route path="/download" element={<Download />} />
 						<Route path="/admin" element={<AdminConnect />} />
