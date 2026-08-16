@@ -58,17 +58,25 @@ fn our_endpoint(state: &AppState) -> Result<String, String> {
 
 #[tauri::command]
 fn get_status(state: tauri::State<'_, AppState>) -> StatusPayload {
-    let guard = state.oracle.0.lock().unwrap();
-    match guard.as_ref() {
-        Some(node) => StatusPayload {
+    let hosted = {
+        let guard = state.oracle.0.lock().unwrap();
+        guard.as_ref().map(|node| {
+            (
+                node.endpoint_id.clone(),
+                node.share_dir.display().to_string(),
+            )
+        })
+    };
+    match hosted {
+        Some((oracle_id, share_dir)) => StatusPayload {
             mode: "host".into(),
-            oracle_id: Some(node.endpoint_id.clone()),
-            share_dir: Some(node.share_dir.display().to_string()),
+            oracle_id: Some(oracle_id),
+            share_dir: Some(share_dir),
             online: true,
         },
         None => StatusPayload {
             mode: "idle".into(),
-            oracle_id: None,
+            oracle_id: our_endpoint(&state).ok(),
             share_dir: None,
             online: false,
         },
@@ -467,6 +475,7 @@ pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_clipboard_manager::init())
         .manage(state)
         .setup(move |app| {
             rooms.0.set_app(app.handle().clone());

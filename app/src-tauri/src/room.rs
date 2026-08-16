@@ -237,7 +237,22 @@ pub fn encode_invite(inv: &RoomInvite) -> String {
 }
 
 pub fn parse_invite(raw: &str) -> Result<RoomInvite> {
-    let s = raw.trim();
+    let trimmed = raw.trim().trim_matches(|c: char| {
+        matches!(c, '"' | '\'' | '`' | ',' | ';' | '(' | ')' | '[' | ']')
+    });
+    if trimmed.starts_with("pyrelink:1:") && !trimmed.starts_with("pyrelink:room:") {
+        bail!("that’s a file/project share code — open Get and paste it there");
+    }
+    let s = if let Some(idx) = trimmed.find("pyrelink:room:1:") {
+        let line = trimmed[idx..]
+            .split(['\n', '\r', '<', '>'])
+            .next()
+            .unwrap_or(&trimmed[idx..]);
+        line.trim_matches(|c: char| matches!(c, '"' | '\'' | '`' | ',' | ';' | '(' | ')'))
+            .to_string()
+    } else {
+        trimmed.to_string()
+    };
     let Some(rest) = s.strip_prefix("pyrelink:room:1:") else {
         bail!("not a room invite — expected pyrelink:room:1:…");
     };

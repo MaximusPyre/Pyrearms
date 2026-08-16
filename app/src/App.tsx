@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
+import { writeText } from "@tauri-apps/plugin-clipboard-manager";
 import { open } from "@tauri-apps/plugin-dialog";
 import "./App.css";
 
@@ -74,6 +75,66 @@ function isProject(item: CatalogItem) {
   return (item.kind || "file") === "project";
 }
 
+function looksLikeBareHex(raw: string) {
+  const t = raw.trim();
+  return t.length >= 32 && t.length <= 128 && /^[0-9a-f-]+$/i.test(t) && !t.includes(":");
+}
+
+function shareCodeHint(raw: string): string | null {
+  const t = raw.trim();
+  if (!t) return null;
+  if (t.startsWith("pyrelink:room:")) {
+    return "That’s a room invite — switch to Rooms and paste it there.";
+  }
+  if (looksLikeBareHex(t)) {
+    return "That’s an endpoint ID or file hash, not a share code. Copy a full ticket from Host (pyrelink:1:…).";
+  }
+  if (!t.includes("pyrelink:1:")) {
+    return "Share codes look like pyrelink:1:<endpoint>:<hash> — not a bare hex string.";
+  }
+  return null;
+}
+
+function fallbackExecCopy(text: string): boolean {
+  const el = document.createElement("textarea");
+  el.value = text;
+  el.setAttribute("readonly", "");
+  el.style.position = "fixed";
+  el.style.top = "0";
+  el.style.left = "0";
+  el.style.width = "1px";
+  el.style.height = "1px";
+  el.style.opacity = "0";
+  document.body.appendChild(el);
+  el.focus();
+  el.select();
+  el.setSelectionRange(0, text.length);
+  let ok = false;
+  try {
+    ok = document.execCommand("copy");
+  } catch {
+    ok = false;
+  }
+  document.body.removeChild(el);
+  return ok;
+}
+
+async function writeClipboard(text: string): Promise<boolean> {
+  try {
+    await writeText(text);
+    return true;
+  } catch {
+    // WebView clipboard permission is often missing on Linux; keep trying.
+  }
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch {
+    // fall through
+  }
+  return fallbackExecCopy(text);
+}
+
 function App() {
   const [tab, setTab] = useState<"get" | "host" | "rooms">("get");
   const [status, setStatus] = useState<Status | null>(null);
@@ -89,6 +150,8 @@ function App() {
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [lastCopied, setLastCopied] = useState<string | null>(null);
+  const [copiedFlash, setCopiedFlash] = useState<string | null>(null);
 
   const [nick, setNick] = useState("anon");
   const [rooms, setRooms] = useState<RoomSummary[]>([]);
@@ -125,6 +188,15 @@ function App() {
       setLibraryItems([]);
     }
   }, []);
+
+  useEffect(() => {
+    if (!message && !copiedFlash) return;
+    const t = window.setTimeout(() => {
+      setMessage(null);
+      setCopiedFlash(null);
+    }, 4200);
+    return () => window.clearTimeout(t);
+  }, [message, copiedFlash]);
 
   const refreshRooms = useCallback(async () => {
     try {
@@ -239,16 +311,22 @@ function App() {
     }
   }
 
-  async function copyText(text: string) {
-    try {
-      await navigator.clipboard.writeText(text);
-      setMessage("Copied to clipboard.");
-    } catch {
-      setError("Clipboard unavailable — select and copy manually.");
+  async function copyText(text: string, label = "Copied to clipboard.") {
+    const value = text.trim();
+    if (!value) return;
+    setLastCopied(value);
+    setError(null);
+    const ok = await writeClipboard(value);
+    if (ok) {
+      setCopiedFlash(value);
+      setMessage(label);
+    } else {
+      setMessage(null);
+      setError("Clipboard blocked — the code is below. Select it and press Ctrl+C.");
     }
   }
 
-  async function copyMyTicket(item: CatalogItem) {
+  async function copyMyTicket(item: CatalogItem, note?: string) {
     const endpoint = status?.oracle_id || myEndpointId;
     if (!endpoint) {
       setError("Need an endpoint ID — go online on Host once.");
@@ -259,7 +337,7 @@ function App() {
       hash: item.sha256,
       name: item.name,
     });
-    await copyText(ticket);
+    await copyText(ticket, note || "Share code copied.");
   }
 
   async function fetchTicket() {
@@ -271,6 +349,12 @@ function App() {
     setBusy(true);
     setError(null);
     setMessage(null);
+    const hint = shareCodeHint(raw);
+    if (hint && (looksLikeBareHex(raw) || raw.trim().startsWith("pyrelink:room:"))) {
+      setError(hint);
+      setBusy(false);
+      return;
+    }
     try {
       if (alsoMirror) {
         const dir = shareDir || (await invoke<string>("get_default_share_dir"));
@@ -293,9 +377,9 @@ function App() {
             hash: item.sha256,
             name: item.name,
           });
-          await navigator.clipboard.writeText(mine).catch(() => undefined);
-          setMessage(
-            `Mirrored ${label} into your host folder. Your share code is on the clipboard.`,
+          await copyText(
+            mine,
+            `Mirrored ${label} into your host folder. Share code copied.`,
           );
         } else {
           setMessage(
@@ -409,11 +493,12 @@ function App() {
   }
 
   async function copyShareCode(item: CatalogItem) {
-    if (!status?.online) {
-      setError("Go online first so peers can reach you.");
-      return;
-    }
-    await copyMyTicket(item);
+    await copyMyTicket(
+      item,
+      status?.online
+        ? "Share code copied."
+        : "Share code copied. Go online so peers can fetch it.",
+    );
   }
 
   async function createProject() {
@@ -546,8 +631,8 @@ function App() {
       await refreshRooms();
       setActiveRoomId(summary.room_id);
       setNewRoomLabel("");
-      await navigator.clipboard.writeText(summary.invite).catch(() => undefined);
-      setMessage(
+      await copyText(
+        summary.invite,
         `Created ${kind} “${summary.label}”. Invite copied — paste it to peers. Hub must stay online.`,
       );
     } catch (e) {
@@ -667,10 +752,12 @@ function App() {
             <button
               type="button"
               className="primary"
-              disabled={busy || !status?.online}
+              disabled={busy || !(status?.oracle_id || myEndpointId)}
               onClick={() => copyShareCode(item)}
             >
-              Copy share code
+              {lastCopied?.includes(item.sha256) && copiedFlash
+                ? "Copied!"
+                : "Copy share code"}
             </button>
           ) : (
             <button
@@ -719,6 +806,9 @@ function App() {
             Rooms
           </button>
         </nav>
+        <span className={`pill ${status?.online ? "on" : ""}`}>
+          {status?.online ? "Online" : "Offline"}
+        </span>
       </header>
 
       <p className="banner-note">
@@ -727,8 +817,30 @@ function App() {
         server — if the room hub goes offline, live history dies with it.
       </p>
 
-      {message && <p className="ok">{message}</p>}
-      {error && <p className="err">{error}</p>}
+      {message && <p className="ok toast">{message}</p>}
+      {error && <p className="err toast">{error}</p>}
+
+      {lastCopied && (
+        <div className="copied-bar">
+          <span className="copied-label">Last copied</span>
+          <textarea
+            className="copied-code"
+            readOnly
+            value={lastCopied}
+            rows={2}
+            spellCheck={false}
+            onFocus={(e) => e.currentTarget.select()}
+            onClick={(e) => e.currentTarget.select()}
+          />
+          <button
+            type="button"
+            className="primary"
+            onClick={() => copyText(lastCopied)}
+          >
+            {copiedFlash === lastCopied ? "Copied!" : "Copy again"}
+          </button>
+        </div>
+      )}
 
       {tab === "get" ? (
         <section className="panel">
@@ -747,6 +859,9 @@ function App() {
               placeholder="pyrelink:1:<endpoint>:<hash>:name"
               spellCheck={false}
             />
+            {shareCodeHint(ticketInput) ? (
+              <span className="field-hint">{shareCodeHint(ticketInput)}</span>
+            ) : null}
           </label>
 
           <label className="check">
@@ -850,13 +965,19 @@ function App() {
 
           {(status?.oracle_id || myEndpointId) && (
             <p className="meta">
-              Your endpoint: <code>{status?.oracle_id || myEndpointId}</code>{" "}
+              Your endpoint ID (not a share code):{" "}
+              <code>{status?.oracle_id || myEndpointId}</code>{" "}
               <button
                 type="button"
                 className="linkish"
-                onClick={() => copyText(status?.oracle_id || myEndpointId)}
+                onClick={() =>
+                  copyText(
+                    status?.oracle_id || myEndpointId,
+                    "Endpoint ID copied — peers need a full share code, not just this.",
+                  )
+                }
               >
-                Copy
+                Copy ID
               </button>
               {status?.online ? " · online" : " · offline"}
             </p>
@@ -1011,7 +1132,9 @@ function App() {
                     </div>
                     <div className="row">
                       <button type="button" onClick={() => copyInvite(activeRoom.room_id)}>
-                        Copy invite
+                        {copiedFlash && lastCopied?.startsWith("pyrelink:room:")
+                          ? "Copied!"
+                          : "Copy invite"}
                       </button>
                       <button type="button" onClick={leaveActiveRoom}>
                         Leave
