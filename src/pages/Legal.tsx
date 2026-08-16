@@ -11,7 +11,7 @@ export function Legal() {
 				<p className="lede">
 					Primary federal authorities for privately made firearms, then a dated
 					fifty-state status map. This is statute discussion for education — not
-					legal advice. 3D2A testers:{" "}
+					legal advice.{" "}
 					<a href={X_URL} target="_blank" rel="noreferrer">
 						{X_HANDLE}
 					</a>

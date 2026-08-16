@@ -93,7 +93,7 @@ export function Download() {
 					<a href={X_URL} target="_blank" rel="noreferrer">
 						{X_HANDLE}
 					</a>{" "}
-					on X for 3D2A testing.
+					on X.
 				</p>
 
 				<p className="fine-print">

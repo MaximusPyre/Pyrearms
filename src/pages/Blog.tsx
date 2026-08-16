@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { BetaCallout } from "../components/BetaCallout";
 import { LAW_BLOG } from "../data/lawBlog";
 import { PMF_AS_OF } from "../data/pmfStates";
 import { X_HANDLE, X_URL } from "../lib/social";
@@ -16,8 +15,6 @@ export function Blog() {
 					Education, not legal advice.
 				</p>
 			</div>
-
-			<BetaCallout />
 
 			<div className="prose">
 				{LAW_BLOG.length === 0 ? (
@@ -44,7 +41,7 @@ export function Blog() {
 					<Link to="/law">Open the state map</Link>
 					{" · "}
 					<a href={X_URL} target="_blank" rel="noreferrer">
-						3D2A testers: {X_HANDLE} on X
+						{X_HANDLE} on X
 					</a>
 				</p>
 			</div>

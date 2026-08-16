@@ -10,7 +10,7 @@ export function Footer() {
 			<p className="footer-brand">PyreArms · PyreLink</p>
 			<p className="footer-copy">
 				Federal PMF law education. Peer share via open-source PyreLink — MIT.
-				3D2A testers:{" "}
+				{" "}
 				<a href={X_URL} target="_blank" rel="noreferrer">
 					{X_HANDLE}
 				</a>

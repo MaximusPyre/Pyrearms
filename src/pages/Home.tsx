@@ -40,7 +40,7 @@ export function Home() {
 							target="_blank"
 							rel="noreferrer"
 						>
-							3D2A testers · {X_HANDLE}
+							{X_HANDLE} on X
 						</a>
 					</div>
 				</div>
