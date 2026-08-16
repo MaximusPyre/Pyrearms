@@ -10,6 +10,13 @@ export type LawBlogPost = {
 /** Newest first. Daily law-watch automation prepends entries here. */
 export const LAW_BLOG: LawBlogPost[] = [
 	{
+		id: "2026-08-16-verified",
+		date: "August 16, 2026",
+		title: "Verified — no new enactments",
+		body: "Primary-source re-check of ATF’s Privately Made Firearms page, 119th Congress bill texts (GovInfo / Congress.gov), and official codes or session-law pages for all 50 states plus D.C. No new federal PMF statute was enacted. H.R. 8059 and H.R. 4143 remain introduced only. No state chapter signed after the August 15 compile changed the map’s tiers. Minnesota SF 3661 / HF 3407 still did not pass. Citations and summaries unchanged. Education, not legal advice.",
+		changed: [],
+	},
+	{
 		id: "2026-08-15-verified",
 		date: "August 15, 2026",
 		title: "Verified — no new enactments",
