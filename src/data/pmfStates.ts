@@ -1,4 +1,4 @@
-/** PMF state status — as of August 15, 2026.
+/** PMF state status — as of August 16, 2026.
  * Provisional classifications for education. Verify primary statutes before relying.
  * Prefer official code citations over advocacy trackers when they diverge.
  */
@@ -27,7 +27,7 @@ export type StatePmfRecord = {
 	summary: string;
 };
 
-export const PMF_AS_OF = "August 15, 2026";
+export const PMF_AS_OF = "August 16, 2026";
 
 export const TIER_LABEL: Record<Tier, string> = {
 	green: "Generally permitted (no state serialization mandate)",
