@@ -1,3 +1,4 @@
+import { LawAlertBanner } from "../components/LawAlertBanner";
 import { StatePmfMap } from "../components/StatePmfMap";
 import { X_HANDLE, X_URL } from "../lib/social";
 
@@ -17,6 +18,8 @@ export function Legal() {
 					.
 				</p>
 			</div>
+
+			<LawAlertBanner />
 
 			<div className="prose">
 				<h2>What is a privately made firearm?</h2>
@@ -186,7 +189,13 @@ export function Legal() {
 						Unlicensed engaging in the business of manufacturing/dealing —
 						§ 922(a)(1)(A).
 					</li>
-					<li>NFA items — separate Title II / Part 479 regime.</li>
+					<li>
+						NFA items — Title II / Part 479 still exists. A party-specific
+						injunction in <em>Silencer Shop Foundation v. ATF</em> (Aug. 2026)
+						limits ATF enforcement of some Form 1 / Form 4 / registration rules
+						for <strong>covered plaintiffs, members, and customers</strong>{" "}
+						only — see below. Not a nationwide repeal.
+					</li>
 					<li>Detectability — ATF PMF guidance + GCA undetectable rules.</li>
 					<li>Prohibited persons may not possess firearms.</li>
 					<li>
@@ -198,6 +207,98 @@ export function Legal() {
 						and the <a href="/blog">law watch</a> log.
 					</li>
 				</ul>
+
+				<h2 id="nfa-injunction">August 2026 NFA injunction (suppressors and more)</h2>
+				<p>
+					<strong>Caption:</strong>{" "}
+					<em>Silencer Shop Foundation v. ATF</em>, No. 6:25-cv-056-H (N.D.
+					Tex.), consolidated with <em>Jensen v. ATF</em>, No. 6:26-cv-277.
+					Judge James Wesley Hendrix.{" "}
+					<strong>Opinion</strong> Dkt. 136 and <strong>final judgment</strong>{" "}
+					Dkt. 137 filed August 5, 2026. The judgment stayed itself seven days;
+					that stay lapsed, and covered transfers were reported beginning August
+					13, 2026.
+				</p>
+				<p>
+					<strong>What the court said:</strong> After the One Big Beautiful Bill
+					Act of 2025 zeroed making and transfer taxes on certain NFA items
+					(silencers, short-barreled rifles/shotguns, and — for some plaintiffs —
+					AOWs), the challenged registration / photo / fingerprint / Form 1 /
+					Form 4 apparatus for those <em>untaxed</em> items could not be saved
+					under a power Congress never invoked. The court entered a{" "}
+					<strong>permanent injunction</strong> against ATF/DOJ enforcing those
+					challenged provisions against the covered parties. It is{" "}
+					<strong>not</strong> a nationwide injunction and{" "}
+					<strong>does not repeal the NFA</strong> for the general public.
+				</p>
+				<p>
+					<strong>Who the order names as covered:</strong> the plaintiffs and,
+					where applicable, their agencies, political subdivisions,{" "}
+					<strong>members</strong>, and <strong>customers — current and
+					future</strong>. The opinion is narrower for commercial customers:
+					coverage is described as incidental to dealings with named commercial
+					plaintiffs, not a free pass for every NFA transfer in America. Fifteen
+					states joined as plaintiffs; that protects those states’ agencies, not
+					every resident of those states. Jensen plaintiffs did not get AOW
+					relief. State bans and dealer GCA / Form 4473 rules can still apply.
+					DOJ can still appeal.
+				</p>
+				<p>
+					<strong>Organizations named as associational plaintiffs</strong> (join
+					only if you independently want membership; we do not sell it):
+				</p>
+				<ul>
+					<li>
+						<a href="https://www.gunowners.org/join/" target="_blank" rel="noreferrer">
+							Gun Owners of America
+						</a>{" "}
+						and{" "}
+						<a href="https://foundation.gunowners.org/" target="_blank" rel="noreferrer">
+							Gun Owners Foundation
+						</a>
+					</li>
+					<li>
+						<a href="https://www.silencershop.com/" target="_blank" rel="noreferrer">
+							Silencer Shop Foundation
+						</a>{" "}
+						/ named industry plaintiffs (SilencerCo, Palmetto State Armory, B&amp;T
+						USA) — customer coverage is transaction-specific per the opinion
+					</li>
+					<li>
+						Firearms Regulatory Accountability Coalition; from the Jensen side:
+						Texas State Rifle Association, FPC Action Foundation, Citizens
+						Committee for the Right to Keep and Bear Arms
+					</li>
+				</ul>
+				<p>
+					<strong>Primary sources:</strong>{" "}
+					<a
+						href="https://storage.courtlistener.com/recap/gov.uscourts.txnd.406278/gov.uscourts.txnd.406278.136.0.pdf"
+						target="_blank"
+						rel="noreferrer"
+					>
+						Memorandum opinion (Dkt. 136, RECAP)
+					</a>
+					;{" "}
+					<a
+						href="https://storage.courtlistener.com/recap/gov.uscourts.txnd.406278/gov.uscourts.txnd.406278.137.0_1.pdf"
+						target="_blank"
+						rel="noreferrer"
+					>
+						Final judgment (Dkt. 137, RECAP)
+					</a>
+					;{" "}
+					<a
+						href="https://www.gunowners.org/federal-court-rules-key-national-firearms-act-restrictions-are-unconstitutional-in-goa-lawsuit/"
+						target="_blank"
+						rel="noreferrer"
+					>
+						GOA case summary
+					</a>
+					. See the{" "}
+					<a href="/blog">law watch</a> post. Not legal advice — verify coverage
+					and your state’s law before you act.
+				</p>
 
 				<h2>Disclaimer</h2>
 				<p>

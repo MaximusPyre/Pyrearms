@@ -10,6 +10,13 @@ export type LawBlogPost = {
 /** Newest first. Daily law-watch automation prepends entries here. */
 export const LAW_BLOG: LawBlogPost[] = [
 	{
+		id: "2026-08-nfa-injunction",
+		date: "August 16, 2026",
+		title: "N.D. Texas NFA injunction in effect for covered parties (suppressors / SBR / SBS)",
+		body: "On August 5, 2026, Judge James Wesley Hendrix (N.D. Texas, San Angelo division) entered final judgment in Silencer Shop Foundation v. ATF, No. 6:25-cv-056-H, consolidated with Jensen v. ATF, No. 6:26-cv-277. The court held that after the One Big Beautiful Bill Act of 2025 zeroed making and transfer taxes on certain NFA items, the challenged registration / Form 1 / Form 4 scheme for those untaxed items exceeded Congress’s enumerated powers as applied to the plaintiffs. A seven-day stay expired; reporting and the judgment’s stay language put the permanent injunction in effect on or about August 13, 2026. The order is not a nationwide repeal of the NFA. Relief runs to the plaintiffs and, where applicable, their agencies, political subdivisions, members, and customers — current and future. Commercial-plaintiff customers are described in the opinion as covered in transactions with those plaintiffs, not for every NFA dealing in the country. State suppressor / SBR bans still apply. Ordinary GCA Form 4473 / background-check rules can still apply. DOJ can still take a conventional appeal. Primary PDFs: opinion Dkt. 136 and judgment Dkt. 137 on RECAP. Education, not legal advice.",
+		changed: ["Federal NFA (party-specific injunction)"],
+	},
+	{
 		id: "2026-08-16-verified",
 		date: "August 16, 2026",
 		title: "Verified — no new enactments",

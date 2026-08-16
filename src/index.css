@@ -715,6 +715,35 @@ a:hover {
 	margin: 0.35rem 0 0.75rem;
 }
 
+.law-alerts {
+	padding: 1.25rem clamp(1.25rem, 4vw, 2.5rem) 0;
+}
+
+.law-alert {
+	width: min(46rem, 100%);
+	margin: 0 auto 1.25rem;
+	padding: 1.15rem 1.25rem 1.3rem;
+	border: 1px solid var(--line);
+	background: linear-gradient(
+		180deg,
+		rgba(196, 55, 28, 0.28),
+		rgba(8, 3, 2, 0.92)
+	);
+}
+
+.law-alert h2 {
+	margin: 0.35rem 0 0.6rem;
+	font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+	text-transform: none;
+	letter-spacing: 0.03em;
+}
+
+.law-alert p {
+	margin: 0 0 0.75rem;
+	color: var(--ink);
+	line-height: 1.5;
+}
+
 /* Footer */
 .site-footer {
 	padding: 2.5rem clamp(1.25rem, 4vw, 2.5rem) 3rem;

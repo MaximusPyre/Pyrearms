@@ -11,8 +11,9 @@ export function Blog() {
 				<p className="eyebrow">Law watch</p>
 				<h1>State PMF legislation</h1>
 				<p className="lede">
-					Dated notes when the fifty-state map is verified or a bill moves.
-					Map as of {PMF_AS_OF}. Education, not legal advice.
+					Dated notes when the fifty-state map is verified, a bill moves, or a
+					federal court / ATF action is material. Map as of {PMF_AS_OF}.
+					Education, not legal advice.
 				</p>
 			</div>
 

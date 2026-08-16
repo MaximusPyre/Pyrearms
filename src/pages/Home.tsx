@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { LawAlertBanner } from "../components/LawAlertBanner";
 import { Embers } from "../components/Embers";
 import { X_HANDLE, X_URL } from "../lib/social";
 
@@ -44,6 +45,8 @@ export function Home() {
 					</div>
 				</div>
 			</section>
+
+			<LawAlertBanner />
 
 			<section className="section band">
 				<div className="section-inner">
