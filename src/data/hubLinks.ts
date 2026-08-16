@@ -20,12 +20,3 @@ export const HUB_LINKS: HubLink[] = [
 	{ id: "tiktok", label: "TikTok", href: "https://www.tiktok.com/@maximusunbound" },
 	{ id: "snapchat", label: "Snapchat", href: "https://www.snapchat.com/add/maximuspyre" },
 ];
-
-/** Edit hrefs here when handles change. Shown only on max.pyrearms.dev */
-export const HUB_LINKS: HubLink[] = [
-	{ id: "x", label: "X", href: X_URL },
-	{ id: "pyrearms", label: "PyreArms", href: "https://pyrearms.dev" },
-	{ id: "onlyfans", label: "OnlyFans", href: "https://onlyfans.com/maximuspyre" },
-	{ id: "tiktok", label: "TikTok", href: "https://www.tiktok.com/@maximuspyre" },
-	{ id: "snapchat", label: "Snapchat", href: "https://www.snapchat.com/add/maximuspyre" },
-];
