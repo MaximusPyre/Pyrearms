@@ -10,6 +10,13 @@ export type LawBlogPost = {
 /** Newest first. Daily law-watch automation prepends entries here. */
 export const LAW_BLOG: LawBlogPost[] = [
 	{
+		id: "2026-08-16-pm-verified",
+		date: "August 16, 2026",
+		title: "Verified — no material new action",
+		body: "Afternoon primary-source re-check after the N.D. Texas NFA injunction post. ATF’s Privately Made Firearms page is still last updated September 11, 2025. GovInfo still lists H.R. 8059, H.R. 4143, S. 2165, and S. 4339 as introduced-only texts; no new federal PMF public law. Newest ATF Federal Register items remain July 6, 2026 proposed rules and an eZ Check withdrawal — not a final PMF or NFA-registration rule. CourtListener / RECAP: Silencer Shop Foundation v. ATF, No. 6:25-cv-056-H, last filings August 12–14 are counsel appearance and withdrawal; no notice of appeal on the docket (ordinary appeal window still runs from the August 5 judgment). Brown v. ATF, No. 4:25-cv-01162 (E.D. Mo.), remains under submission after the August 10 argument; no injunction or merits order. Official codes and session-law pages for restricted jurisdictions still match the map. Minnesota SF 3661 / HF 3407 still did not pass. Michigan SB 331 is still in House Government Operations. Pennsylvania HB 1443 is still referred to Judiciary (official history generated August 16, 2026). Map fields, citations, and the active NFA banner are unchanged. Education, not legal advice.",
+		changed: [],
+	},
+	{
 		id: "2026-08-nfa-injunction",
 		date: "August 16, 2026",
 		title: "N.D. Texas NFA injunction in effect for covered parties (suppressors / SBR / SBS)",
