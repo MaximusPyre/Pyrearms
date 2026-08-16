@@ -6,10 +6,20 @@ import { Download } from "./pages/Download";
 import { Home } from "./pages/Home";
 import { Blog } from "./pages/Blog";
 import { Legal } from "./pages/Legal";
+import { LinkHub } from "./pages/LinkHub";
 import { Story } from "./pages/Story";
 import "./index.css";
 
+function isLinkHubHost() {
+	if (typeof window === "undefined") return false;
+	return window.location.hostname === "max.pyrearms.dev";
+}
+
 export default function App() {
+	if (isLinkHubHost()) {
+		return <LinkHub />;
+	}
+
 	return (
 		<BrowserRouter>
 			<div className="app-shell">
