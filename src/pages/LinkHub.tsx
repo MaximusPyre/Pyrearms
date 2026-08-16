@@ -25,6 +25,11 @@ export function LinkHub() {
 							rel="noreferrer"
 						>
 							{link.label}
+							{link.wip ? (
+								<span className="hub-wip" title="Work in progress">
+									🚧 WIP
+								</span>
+							) : null}
 						</a>
 					</li>
 				))}

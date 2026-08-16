@@ -1000,3 +1000,16 @@ a:hover {
 	color: #ffc06a;
 	border-color: var(--ember);
 }
+
+.hub-wip {
+	display: inline-block;
+	margin-left: 0.55rem;
+	padding: 0.12rem 0.4rem;
+	border-radius: 999px;
+	font-size: 0.72rem;
+	letter-spacing: 0.06em;
+	font-weight: 700;
+	color: #1a1208;
+	background: #ffb347;
+	vertical-align: middle;
+}
