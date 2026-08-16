@@ -89,9 +89,17 @@ label { color: var(--ink-dim); font-size: 0.88rem; }
 .list { list-style: none; padding: 0; margin: 1.5rem 0 0; }
 .list li {
   border-top: 1px solid var(--line);
-  padding: 0.7rem 0;
+  padding: 1rem 0;
 }
 .share { word-break: break-all; color: var(--molten); }
+.row-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.55rem; }
+.row-actions a, .row-actions button {
+  margin-top: 0;
+  min-height: 2.6rem;
+  padding: 0.65rem 0.9rem;
+}
+input[type="password"] { font-size: 16px; }
+nav.desk-nav { display: flex; gap: 1rem; margin: 0 0 1.25rem; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; }
 `;
 
 function page(title: string, body: string): string {
@@ -109,6 +117,19 @@ function page(title: string, body: string): string {
     <span class="mark" aria-hidden="true"></span>
     ${body}
   </div>
+  <script>
+    async function copyText(t) {
+      try { await navigator.clipboard.writeText(t); }
+      catch { prompt("Copy this link", t); }
+    }
+    async function shareLink(t, title) {
+      if (navigator.share) {
+        try { await navigator.share({ title: title || "Clip", url: t }); return; }
+        catch (e) { if (e && e.name === "AbortError") return; }
+      }
+      await copyText(t);
+    }
+  </script>
 </body>
 </html>`;
 }
@@ -131,9 +152,63 @@ export function loginPage(error?: string): string {
     ${error ? `<p class="err">${escapeHtml(error)}</p>` : ""}
     <form method="post" action="/login">
       <label>Password</label>
-      <input type="password" name="password" required autofocus />
+      <input type="password" name="password" required autofocus autocomplete="current-password" />
       <button type="submit">Enter</button>
-    </form>`,
+    </form>
+    <p class="lede">Same password on your phone at this page lists every clip you uploaded from a computer.</p>`,
+	);
+}
+
+function deskPage(
+	origin: string,
+	clips: { id: string; title: string }[],
+	heading: string,
+	lede: string,
+	showForm: boolean,
+	notice?: string,
+): string {
+	const rows = clips
+		.map((c) => {
+			const url = `${origin}/v/${c.id}`;
+			const safeUrl = JSON.stringify(url);
+			const safeTitle = JSON.stringify(c.title);
+			return `<li>
+        <a href="/v/${encodeURIComponent(c.id)}">${escapeHtml(c.title)}</a>
+        <p class="share">${escapeHtml(url)}</p>
+        <div class="row-actions">
+          <a class="btn" href="/v/${encodeURIComponent(c.id)}">Open</a>
+          <button type="button" onclick='copyText(${safeUrl})'>Copy</button>
+          <button type="button" onclick='shareLink(${safeUrl}, ${safeTitle})'>Share</button>
+        </div>
+      </li>`;
+		})
+		.join("");
+	return page(
+		`${heading} · watch`,
+		`
+    <nav class="desk-nav">
+      <a href="/upload">Upload</a>
+      <a href="/clips">All links</a>
+    </nav>
+    <p class="eyebrow">Private desk</p>
+    <h1>${escapeHtml(heading)}</h1>
+    <p class="lede">${escapeHtml(lede)}</p>
+    ${notice ? `<p class="share">${escapeHtml(notice)}</p>` : ""}
+    ${
+			showForm
+				? `
+    <form method="post" action="/upload" enctype="multipart/form-data">
+      <label>Title</label>
+      <input type="text" name="title" placeholder="optional" />
+      <label>Video</label>
+      <input type="file" name="file" accept="video/mp4,video/webm,video/quicktime,video/x-m4v" required />
+      <button type="submit">Upload</button>
+    </form>`
+				: ""
+		}
+    <form method="post" action="/logout"><button type="submit">Log out</button></form>
+    <h2 class="eyebrow" style="margin-top:2rem">Your links</h2>
+    <ul class="list">${rows || "<li class='lede'>Nothing uploaded yet.</li>"}</ul>`,
 	);
 }
 
@@ -142,28 +217,26 @@ export function uploadPage(
 	clips: { id: string; title: string }[],
 	notice?: string,
 ): string {
-	const rows = clips
-		.map(
-			(c) =>
-				`<li><a href="/v/${encodeURIComponent(c.id)}">${escapeHtml(c.title)}</a><br /><span class="share">${escapeHtml(`${origin}/v/${c.id}`)}</span></li>`,
-		)
-		.join("");
-	return page(
-		"Upload · watch",
-		`
-    <p class="eyebrow">Private desk</p>
-    <h1>New clip</h1>
-    <p class="lede">MP4 / WebM / MOV, about 90&nbsp;MB max. You get a link to send people.</p>
-    ${notice ? `<p class="share">${escapeHtml(notice)}</p>` : ""}
-    <form method="post" action="/upload" enctype="multipart/form-data">
-      <label>Title</label>
-      <input type="text" name="title" placeholder="optional" />
-      <label>Video</label>
-      <input type="file" name="file" accept="video/mp4,video/webm,video/quicktime" required />
-      <button type="submit">Upload</button>
-    </form>
-    <form method="post" action="/logout"><button type="submit">Log out</button></form>
-    <ul class="list">${rows || "<li class='lede'>Nothing uploaded yet.</li>"}</ul>`,
+	return deskPage(
+		origin,
+		clips,
+		"New clip",
+		"MP4 / WebM / MOV, about 90 MB max. After you upload on a computer, open All links on your phone with the same password.",
+		true,
+		notice,
+	);
+}
+
+export function clipsPage(
+	origin: string,
+	clips: { id: string; title: string }[],
+): string {
+	return deskPage(
+		origin,
+		clips,
+		"All links",
+		"Everything you have uploaded. Copy or share from this phone.",
+		false,
 	);
 }
 
@@ -180,7 +253,10 @@ export function playerPage(id: string, title: string, origin: string): string {
     </div>
     <p class="lede">Share this page:</p>
     <p class="share">${escapeHtml(url)}</p>
-    <button type="button" onclick="navigator.clipboard.writeText(${JSON.stringify(url)})">Copy link</button>
+    <div class="row-actions">
+      <button type="button" onclick='copyText(${JSON.stringify(url)})'>Copy link</button>
+      <button type="button" onclick='shareLink(${JSON.stringify(url)}, ${JSON.stringify(title)})'>Share</button>
+    </div>
     `,
 	);
 }

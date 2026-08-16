@@ -11,6 +11,7 @@ import {
 	notFoundPage,
 	playerPage,
 	uploadPage,
+	clipsPage,
 } from "./html.js";
 
 const COOKIE = "pyre_watch";
@@ -82,10 +83,38 @@ async function requireSession(c: Context<{ Bindings: Env }>): Promise<boolean> {
 	return validSession(c.env.SESSION_SECRET, token);
 }
 
+const INDEX_KEY = "_index.json";
+
+type ClipRow = { id: string; title: string; created: string };
+
+async function readIndex(env: Env): Promise<ClipRow[]> {
+	const obj = await env.VIDEOS.get(INDEX_KEY);
+	if (!obj) return [];
+	try {
+		const parsed = JSON.parse(await obj.text()) as { clips?: ClipRow[] };
+		return Array.isArray(parsed.clips) ? parsed.clips : [];
+	} catch {
+		return [];
+	}
+}
+
+async function writeIndex(env: Env, clips: ClipRow[]): Promise<void> {
+	await env.VIDEOS.put(INDEX_KEY, JSON.stringify({ clips }), {
+		httpMetadata: { contentType: "application/json" },
+	});
+}
+
 async function listClips(env: Env): Promise<{ id: string; title: string }[]> {
-	const listed = await env.VIDEOS.list({ limit: 50 });
+	const fromIndex = await readIndex(env);
+	if (fromIndex.length) {
+		return fromIndex.map(({ id, title }) => ({ id, title }));
+	}
+	const listed = await env.VIDEOS.list({
+		limit: 100,
+		include: ["customMetadata"],
+	});
 	const rows = listed.objects
-		.filter((o) => !o.key.startsWith("meta/"))
+		.filter((o) => o.key !== INDEX_KEY)
 		.map((o) => ({
 			id: o.key,
 			title: o.customMetadata?.title || o.key,
@@ -95,12 +124,18 @@ async function listClips(env: Env): Promise<{ id: string; title: string }[]> {
 	return rows.map(({ id, title }) => ({ id, title }));
 }
 
-app.get("/", (c) => c.redirect("/upload"));
+app.get("/", (c) => c.redirect("/clips"));
 
 app.get("/upload", async (c) => {
 	if (!(await requireSession(c))) return html(loginPage());
 	const clips = await listClips(c.env);
 	return html(uploadPage(originOf(c), clips));
+});
+
+app.get("/clips", async (c) => {
+	if (!(await requireSession(c))) return html(loginPage());
+	const clips = await listClips(c.env);
+	return html(clipsPage(originOf(c), clips));
 });
 
 app.post("/login", async (c) => {
@@ -117,12 +152,12 @@ app.post("/login", async (c) => {
 		path: "/",
 		maxAge: 60 * 60 * 24 * 14,
 	});
-	return c.redirect("/upload");
+	return c.redirect("/clips");
 });
 
 app.post("/logout", (c) => {
 	deleteCookie(c, COOKIE, { path: "/" });
-	return c.redirect("/upload");
+	return c.redirect("/clips");
 });
 
 app.post("/upload", async (c) => {
@@ -153,6 +188,15 @@ app.post("/upload", async (c) => {
 		httpMetadata: { contentType: type },
 		customMetadata: { title },
 	});
+	const seeded = await listClips(c.env);
+	const index = await readIndex(c.env);
+	const base = index.length ? index : seeded.map((c) => ({
+		id: c.id,
+		title: c.title,
+		created: new Date().toISOString(),
+	}));
+	const next = [{ id, title, created: new Date().toISOString() }, ...base.filter((c) => c.id !== id)];
+	await writeIndex(c.env, next);
 	return c.redirect(`/v/${id}`);
 });
 
