@@ -12,6 +12,7 @@ import {
 	playerPage,
 	uploadPage,
 	clipsPage,
+	hubStatsPage,
 } from "./html.js";
 
 const COOKIE = "pyre_watch";
@@ -84,6 +85,7 @@ async function requireSession(c: Context<{ Bindings: Env }>): Promise<boolean> {
 }
 
 const INDEX_KEY = "_index.json";
+const HUB_STATS_KEY = "_hub_stats.json";
 
 type ClipRow = { id: string; title: string; created: string };
 
@@ -114,7 +116,7 @@ async function listClips(env: Env): Promise<{ id: string; title: string }[]> {
 		include: ["customMetadata"],
 	});
 	const rows = listed.objects
-		.filter((o) => o.key !== INDEX_KEY)
+		.filter((o) => o.key !== INDEX_KEY && o.key !== HUB_STATS_KEY)
 		.map((o) => ({
 			id: o.key,
 			title: o.customMetadata?.title || o.key,
@@ -122,6 +124,45 @@ async function listClips(env: Env): Promise<{ id: string; title: string }[]> {
 		}));
 	rows.sort((a, b) => +b.uploaded - +a.uploaded);
 	return rows.map(({ id, title }) => ({ id, title }));
+}
+
+type HubStats = { views: number; clicks: Record<string, number> };
+
+const HUB_LINK_LABELS: Record<string, string> = {
+	x: "X",
+	pyrearms: "PyreArms",
+	sparks: "Sparks",
+	onlyfans: "OnlyFans",
+	tiktok: "TikTok",
+	snapchat: "Snapchat",
+};
+
+async function readHubStats(env: Env): Promise<HubStats> {
+	const obj = await env.VIDEOS.get(HUB_STATS_KEY);
+	if (!obj) return { views: 0, clicks: {} };
+	try {
+		const parsed = JSON.parse(await obj.text()) as HubStats;
+		return {
+			views: Number(parsed.views) || 0,
+			clicks: parsed.clicks && typeof parsed.clicks === "object" ? parsed.clicks : {},
+		};
+	} catch {
+		return { views: 0, clicks: {} };
+	}
+}
+
+async function writeHubStats(env: Env, stats: HubStats): Promise<void> {
+	await env.VIDEOS.put(HUB_STATS_KEY, JSON.stringify(stats), {
+		httpMetadata: { contentType: "application/json" },
+	});
+}
+
+function hubCors(): HeadersInit {
+	return {
+		"access-control-allow-origin": "https://max.pyrearms.dev",
+		"access-control-allow-methods": "POST, OPTIONS",
+		"access-control-allow-headers": "content-type",
+	};
 }
 
 app.get("/", (c) => c.redirect("/clips"));
@@ -136,6 +177,27 @@ app.get("/clips", async (c) => {
 	if (!(await requireSession(c))) return html(loginPage());
 	const clips = await listClips(c.env);
 	return html(clipsPage(originOf(c), clips));
+});
+
+app.get("/hub-stats", async (c) => {
+	if (!(await requireSession(c))) return html(loginPage());
+	const stats = await readHubStats(c.env);
+	return html(hubStatsPage(stats.views, stats.clicks, HUB_LINK_LABELS));
+});
+
+app.options("/hub-event", () => new Response(null, { status: 204, headers: hubCors() }));
+
+app.post("/hub-event", async (c) => {
+	const raw = (await c.req.text()).trim();
+	const [kind, link] = raw.split(":");
+	const stats = await readHubStats(c.env);
+	if (kind === "view") {
+		stats.views += 1;
+	} else if (kind === "click" && link && (link in HUB_LINK_LABELS || /^[a-z0-9_-]{1,40}$/i.test(link))) {
+		stats.clicks[link] = (stats.clicks[link] || 0) + 1;
+	}
+	await writeHubStats(c.env, stats);
+	return new Response("ok", { headers: hubCors() });
 });
 
 app.post("/login", async (c) => {

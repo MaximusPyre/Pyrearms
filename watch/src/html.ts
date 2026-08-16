@@ -189,6 +189,7 @@ function deskPage(
     <nav class="desk-nav">
       <a href="/upload">Upload</a>
       <a href="/clips">All links</a>
+      <a href="/hub-stats">Hub stats</a>
     </nav>
     <p class="eyebrow">Private desk</p>
     <h1>${escapeHtml(heading)}</h1>
@@ -258,6 +259,36 @@ export function playerPage(id: string, title: string, origin: string): string {
       <button type="button" onclick='shareLink(${JSON.stringify(url)}, ${JSON.stringify(title)})'>Share</button>
     </div>
     `,
+	);
+}
+
+export function hubStatsPage(
+	views: number,
+	clicks: Record<string, number>,
+	labels: Record<string, string>,
+): string {
+	const ids = [...new Set([...Object.keys(labels), ...Object.keys(clicks)])].sort();
+	const rows = ids
+		.map((id) => {
+			const n = clicks[id] || 0;
+			const name = labels[id] || id;
+			return `<li><strong>${escapeHtml(name)}</strong> — ${n} click${n === 1 ? "" : "s"}</li>`;
+		})
+		.join("");
+	return page(
+		"Hub stats · watch",
+		`
+    <nav class="desk-nav">
+      <a href="/upload">Upload</a>
+      <a href="/clips">All links</a>
+      <a href="/hub-stats">Hub stats</a>
+    </nav>
+    <p class="eyebrow">max.pyrearms.dev</p>
+    <h1>Hub stats</h1>
+    <p class="lede">Page views: <strong>${views}</strong></p>
+    <ul class="list">${rows || "<li class='lede'>No clicks yet.</li>"}</ul>
+    <p class="lede">Counts start from when tracking went live. Refresh this page anytime.</p>
+    <form method="post" action="/logout"><button type="submit">Log out</button></form>`,
 	);
 }
 
