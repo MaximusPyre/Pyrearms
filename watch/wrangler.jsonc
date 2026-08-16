@@ -1,0 +1,15 @@
+{
+	"$schema": "../node_modules/wrangler/config-schema.json",
+	"name": "pyrewatch",
+	"main": "src/index.ts",
+	"compatibility_date": "2026-08-16",
+	"workers_dev": true,
+	"routes": [{ "pattern": "watch.pyrearms.dev", "custom_domain": true }],
+	"observability": { "enabled": true },
+	"r2_buckets": [
+		{
+			"binding": "VIDEOS",
+			"bucket_name": "pyrewatch-videos"
+		}
+	]
+}
