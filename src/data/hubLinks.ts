@@ -12,6 +12,11 @@ export const HUB_LINKS: HubLink[] = [
 	{ id: "x", label: "X", href: X_URL },
 	{ id: "pyrearms", label: "PyreArms", href: "https://pyrearms.dev" },
 	{
+		id: "sparks",
+		label: "Sparks",
+		href: "https://sparks.manticore.technology/?affiliate=maximuspyre",
+	},
+	{
 		id: "onlyfans",
 		label: "OnlyFans",
 		href: "https://onlyfans.com/maximuspyre",
