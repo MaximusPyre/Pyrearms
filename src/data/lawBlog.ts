@@ -10,6 +10,13 @@ export type LawBlogPost = {
 /** Newest first. Daily law-watch automation prepends entries here. */
 export const LAW_BLOG: LawBlogPost[] = [
 	{
+		id: "2026-08-18-verified",
+		date: "August 18, 2026",
+		title: "Verified — no material new action",
+		body: "Primary-source re-check of CourtListener / RECAP, GovInfo, the Federal Register API, and official state codes / session-law pages. No new federal PMF public law. GovInfo still lists only introduced texts for H.R. 8059 (IH, Mar. 24, 2026), H.R. 4143 (IH), S. 2165 (IS), and S. 4339 (IS); no EH/ES/enrolled packages. ATF’s newest Federal Register items remain the July 6, 2026 proposed rules on fingerprints/photos and NFA government-contract registration, plus the eZ Check withdrawal — not a final PMF or NFA-registration rule. CourtListener: Silencer Shop Foundation v. ATF, No. 6:25-cv-056-H, last filing is still Aug. 14 (order granting counsel withdrawal); no notice of appeal on the docket (ordinary FRAP 4 window still runs from the Aug. 5 judgment). Brown v. ATF, No. 4:25-cv-01162 (E.D. Mo.), remains under submission after the Aug. 10 argument; newest docket item is the Aug. 12 hearing transcript. Colon v. ATF, No. 8:23-cv-00223 (M.D. Fla.), Dkt. 78 (Aug. 17) is a case-management endorsed order asking the parties whether that SBR case should proceed in light of the N.D. Texas decision — not a merits injunction. Official codes for restricted jurisdictions still match the map. Minnesota SF 3661 remains at Senate second reading; companion HF 3407 was never reported. Michigan SB 331 is still in House Government Operations. Pennsylvania HB 1443 is still referred to Judiciary (official history generated August 18, 2026). Map fields, citations, summaries, and the active NFA banner are unchanged. Education, not legal advice.",
+		changed: [],
+	},
+	{
 		id: "2026-08-16-pm-verified",
 		date: "August 16, 2026",
 		title: "Verified — no material new action",
