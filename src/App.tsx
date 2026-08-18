@@ -7,7 +7,6 @@ import { Home } from "./pages/Home";
 import { Blog } from "./pages/Blog";
 import { Legal } from "./pages/Legal";
 import { LinkHub } from "./pages/LinkHub";
-import { Story } from "./pages/Story";
 import "./index.css";
 
 function isLinkHubHost() {
@@ -27,7 +26,7 @@ export default function App() {
 				<main>
 					<Routes>
 						<Route path="/" element={<Home />} />
-						<Route path="/story" element={<Story />} />
+						<Route path="/story" element={<Navigate to="/" replace />} />
 						<Route path="/law" element={<Legal />} />
 						<Route path="/blog" element={<Blog />} />
 						<Route path="/legal" element={<Navigate to="/law" replace />} />

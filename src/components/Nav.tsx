@@ -1,11 +1,9 @@
 import { NavLink } from "react-router-dom";
-import { X_HANDLE, X_URL } from "../lib/social";
 
 const links = [
 	{ to: "/", label: "Home", end: true },
 	{ to: "/law", label: "Law" },
 	{ to: "/blog", label: "Watch" },
-	{ to: "/story", label: "The Pyre" },
 	{ to: "/download", label: "Download" },
 ];
 
@@ -27,14 +25,6 @@ export function Nav() {
 						{l.label}
 					</NavLink>
 				))}
-				<a
-					className="nav-x"
-					href={X_URL}
-					target="_blank"
-					rel="noreferrer"
-				>
-					{X_HANDLE}
-				</a>
 			</nav>
 		</header>
 	);

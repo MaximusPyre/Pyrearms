@@ -1,6 +1,3 @@
-import { BetaCallout } from "../components/BetaCallout";
-import { X_HANDLE, X_URL } from "../lib/social";
-
 const GITHUB = "https://github.com/MaximusPyre/Pyrearms";
 const RELEASE = `${GITHUB}/releases/tag/v0.1.0`;
 const ASSET = (name: string) =>
@@ -13,12 +10,10 @@ export function Download() {
 				<p className="eyebrow">Open source</p>
 				<h1>Download PyreLink</h1>
 				<p className="lede">
-					Creator-less peer share. Host files, copy a share code to social
-					media, others fetch while you stay online.
+					Peer share without a central file dump. Host files, copy a share code,
+					others fetch while you stay online.
 				</p>
 			</div>
-
-			<BetaCallout />
 
 			<div className="prose">
 				<p>
@@ -87,14 +82,6 @@ export function Download() {
 						<strong>Get</strong> — paste a share code, fetch over P2P.
 					</li>
 				</ul>
-
-				<p>
-					Windows / macOS builds and new PyreLink betas: DM{" "}
-					<a href={X_URL} target="_blank" rel="noreferrer">
-						{X_HANDLE}
-					</a>{" "}
-					on X.
-				</p>
 
 				<p className="fine-print">
 					MIT licensed. Protocol notes in the repo. Follow U.S. federal and your

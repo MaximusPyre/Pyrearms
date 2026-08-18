@@ -1,31 +1,19 @@
 import { Link } from "react-router-dom";
 import { LawAlertBanner } from "../components/LawAlertBanner";
 import { Embers } from "../components/Embers";
-import { X_HANDLE, X_URL } from "../lib/social";
 
 export function Home() {
 	return (
 		<>
 			<section className="hero">
-				<video
-					className="hero-visual"
-					autoPlay
-					muted
-					loop
-					playsInline
-					poster="/brand/pyre-hero.jpg"
-					aria-hidden="true"
-				>
-					<source src="/brand/hero.mp4" type="video/mp4" />
-				</video>
 				<div className="hero-glow" aria-hidden="true" />
 				<Embers />
 				<div className="hero-copy">
 					<p className="hero-kicker">United States · Second Amendment</p>
 					<h1 className="visually-hidden">PyreArms</h1>
 					<p className="hero-lead">
-						Federal law on personally manufactured firearms — and PyreLink, an
-						open peer-share tool for advocates.
+						PyreArms is a collective for federal privately made firearm law
+						education, and PyreLink — open peer share for advocates.
 					</p>
 					<div className="hero-actions">
 						<Link className="btn btn-primary" to="/law">
@@ -34,14 +22,6 @@ export function Home() {
 						<Link className="btn btn-ghost" to="/download">
 							Get PyreLink
 						</Link>
-						<a
-							className="btn btn-primary"
-							href={X_URL}
-							target="_blank"
-							rel="noreferrer"
-						>
-							{X_HANDLE} on X
-						</a>
 					</div>
 				</div>
 			</section>
@@ -52,8 +32,8 @@ export function Home() {
 				<div className="section-inner">
 					<h2>Know the statute</h2>
 					<p>
-						Media says “ghost guns.” ATF publishes rules for privately made
-						firearms (PMFs). We point at primary sources.
+						Media says “ghost guns.” ATF publishes the rules for privately made
+						firearms. PyreArms points at primary sources.
 					</p>
 					<Link className="text-link" to="/law">
 						Open the law page →
