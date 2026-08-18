@@ -488,6 +488,13 @@ a:hover {
 .prose h2 {
 	margin-top: 2.25rem;
 	font-size: 1.25rem;
+	scroll-margin-top: 5rem;
+}
+
+.prose h3 {
+	margin-top: 1.6rem;
+	font-size: 1.05rem;
+	scroll-margin-top: 5rem;
 }
 
 .prose ul,

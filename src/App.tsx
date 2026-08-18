@@ -2,6 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Footer } from "./components/Footer";
 import { Nav } from "./components/Nav";
 import { AdminConnect } from "./pages/AdminConnect";
+import { Bodycams } from "./pages/Bodycams";
 import { Download } from "./pages/Download";
 import { Home } from "./pages/Home";
 import { Blog } from "./pages/Blog";
@@ -31,6 +32,7 @@ export default function App() {
 						<Route path="/blog" element={<Blog />} />
 						<Route path="/legal" element={<Navigate to="/law" replace />} />
 						<Route path="/download" element={<Download />} />
+						<Route path="/bodycams" element={<Bodycams />} />
 						<Route path="/admin" element={<AdminConnect />} />
 						<Route path="/files" element={<Navigate to="/download" replace />} />
 						<Route path="/kits" element={<Navigate to="/download" replace />} />
