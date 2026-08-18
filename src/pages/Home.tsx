@@ -7,8 +7,6 @@ export function Home() {
 	return (
 		<>
 			<section className="hero">
-				<Embers />
-				<div className="hero-glow" aria-hidden="true" />
 				<video
 					className="hero-visual"
 					autoPlay
@@ -20,6 +18,8 @@ export function Home() {
 				>
 					<source src="/brand/hero.mp4" type="video/mp4" />
 				</video>
+				<div className="hero-glow" aria-hidden="true" />
+				<Embers />
 				<div className="hero-copy">
 					<p className="hero-kicker">United States · Second Amendment</p>
 					<h1 className="visually-hidden">PyreArms</h1>
