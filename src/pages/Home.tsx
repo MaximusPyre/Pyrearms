@@ -6,6 +6,11 @@ export function Home() {
 	return (
 		<>
 			<section className="hero">
+				<img
+					className="hero-visual"
+					src="/brand/hero-bg.jpg"
+					alt=""
+				/>
 				<div className="hero-glow" aria-hidden="true" />
 				<Embers />
 				<div className="hero-copy">
