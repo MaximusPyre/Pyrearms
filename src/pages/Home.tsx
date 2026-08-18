@@ -9,17 +9,17 @@ export function Home() {
 			<section className="hero">
 				<Embers />
 				<div className="hero-glow" aria-hidden="true" />
-				<picture>
-					<source
-						media="(min-width: 768px)"
-						srcSet="/brand/pyre-hero-desktop.jpg"
-					/>
-					<img
-						className="hero-visual"
-						src="/brand/pyre-hero.jpg"
-						alt=""
-					/>
-				</picture>
+				<video
+					className="hero-visual"
+					autoPlay
+					muted
+					loop
+					playsInline
+					poster="/brand/pyre-hero.jpg"
+					aria-hidden="true"
+				>
+					<source src="/brand/hero.mp4" type="video/mp4" />
+				</video>
 				<div className="hero-copy">
 					<p className="hero-kicker">United States · Second Amendment</p>
 					<h1 className="visually-hidden">PyreArms</h1>
