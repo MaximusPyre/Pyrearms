@@ -185,6 +185,19 @@ export function Legal() {
 						§ 922(a)(1)(A).
 					</li>
 					<li>
+						ATF’s 2022 “frame or receiver” Final Rule (including partially
+						complete frames/receivers and some kits) remains in the eCFR for
+						the public. A party-specific injunction in{" "}
+						<em>Defense Distributed v. Blanche</em> (Aug. 2026) limits
+						enforcement of 27 C.F.R. §§ 478.11 and 478.12(c) against{" "}
+						<strong>
+							Defense Distributed, SAF, and SAF’s current or future members
+						</strong>{" "}
+						on named products — see below. Not a nationwide repeal.{" "}
+						<em>Bondi v. VanDerStok</em> (2025) still holds that the GCA can
+						reach at least some unfinished frames.
+					</li>
+					<li>
 						NFA items — Title II / Part 479 still exists. A party-specific
 						injunction in <em>Silencer Shop Foundation v. ATF</em> (Aug. 2026)
 						limits ATF enforcement of some Form 1 / Form 4 / registration rules
@@ -202,6 +215,92 @@ export function Legal() {
 						and the <a href="/blog">law watch</a> log.
 					</li>
 				</ul>
+
+				<h2 id="frame-receiver-injunction">
+					August 2026 frame/receiver injunction (unfinished frames and kits)
+				</h2>
+				<p>
+					<strong>Caption:</strong>{" "}
+					<em>VanDerStok</em> / <em>Defense Distributed v. Blanche</em>, No.
+					4:22-cv-00691-O (N.D. Tex., Fort Worth). Chief Judge Reed O’Connor.{" "}
+					<strong>Opinion</strong> Dkt. 330 filed August 17, 2026.{" "}
+					<strong>Final judgment</strong> Dkt. 331 filed August 18, 2026. The
+					judgment does not stay itself.
+				</p>
+				<p>
+					<strong>What the court said:</strong> After the Supreme Court in{" "}
+					<em>Bondi v. VanDerStok</em>, 604 U.S. 458 (2025), held that the Gun
+					Control Act can reach at least some partially complete frames and
+					weapon-parts kits, only Defense Distributed and the Second Amendment
+					Foundation remained in this case. Judge O’Connor granted the
+					government summary judgment on the remaining APA counts (change of
+					position, failure to consider, and delegation). On the constitutional
+					counts he held that 27 C.F.R. § 478.11 (definition of “firearm”
+					including certain kits) and § 478.12(c) (partially complete frames or
+					receivers) are unconstitutional under the Second Amendment and void
+					for vagueness under the Fifth Amendment’s Due Process Clause{" "}
+					<em>as applied to the covered parties</em>. He did{" "}
+					<strong>not</strong> vacate the 2022 Final Rule nationwide and did{" "}
+					<strong>not</strong> hold that ATF lacked statutory authority after{" "}
+					<em>Bondi</em>.
+				</p>
+				<p>
+					<strong>Who the order names as covered:</strong> Defense Distributed,
+					the Second Amendment Foundation, and{" "}
+					<strong>SAF’s current or future members</strong>. The declaratory
+					paragraph says §§ 478.11 and 478.12(c) “cannot be enforced against”
+					those parties. The permanent injunction is product-specific: it bars
+					enforcement of those two sections against those same parties{" "}
+					<strong>
+						with respect to Defense Distributed’s M1911 80% Frames and G80
+						Build Kit, Unfinished Receiver, and Grip Module
+					</strong>
+					. The 2026 judgment does not add a general “customers of Defense
+					Distributed” class (an earlier 2023 preliminary injunction in this
+					docket had used customer language; this final judgment does not).
+					State unfinished-frame, serialization, and 3D-print bans still apply.
+					Ordinary GCA Form 4473 / background-check rules can still apply to
+					completed firearms. DOJ can still appeal.
+				</p>
+				<p>
+					<strong>Organizations named as plaintiffs</strong> (join only if you
+					independently want membership; we do not sell it):
+				</p>
+				<ul>
+					<li>
+						<a href="https://saf.org/join-saf/" target="_blank" rel="noreferrer">
+							Second Amendment Foundation
+						</a>{" "}
+						— the judgment expressly covers current and future members
+					</li>
+					<li>
+						<a href="https://defdist.org/" target="_blank" rel="noreferrer">
+							Defense Distributed
+						</a>{" "}
+						— named commercial plaintiff; the injunction lists specific
+						product lines, not every unfinished frame sold in the United States
+					</li>
+				</ul>
+				<p>
+					<strong>Primary sources:</strong>{" "}
+					<a
+						href="https://storage.courtlistener.com/recap/gov.uscourts.txnd.366145/gov.uscourts.txnd.366145.330.0.pdf"
+						target="_blank"
+						rel="noreferrer"
+					>
+						Opinion (Dkt. 330, RECAP)
+					</a>
+					;{" "}
+					<a
+						href="https://storage.courtlistener.com/recap/gov.uscourts.txnd.366145/gov.uscourts.txnd.366145.331.0.pdf"
+						target="_blank"
+						rel="noreferrer"
+					>
+						Final judgment (Dkt. 331, RECAP)
+					</a>
+					. See the <a href="/blog">law watch</a> post. Not legal advice —
+					verify coverage and your state’s law before you act.
+				</p>
 
 				<h2 id="nfa-injunction">August 2026 NFA injunction (suppressors and more)</h2>
 				<p>
