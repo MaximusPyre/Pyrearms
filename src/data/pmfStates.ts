@@ -1,6 +1,8 @@
-/** PMF state status — as of August 18, 2026.
+/** PMF state status — as of August 20, 2026.
  * Provisional classifications for education. Verify primary statutes before relying.
  * Prefer official code citations over advocacy trackers when they diverge.
+ * Federal 2022 frame/receiver rule still in the CFR for non-covered parties; see Legal.tsx
+ * for the Aug. 18, 2026 party-specific N.D. Texas injunction (Defense Distributed / SAF).
  */
 
 export type YesNoUnclear = "yes" | "no" | "unclear" | "restricted";
@@ -27,7 +29,7 @@ export type StatePmfRecord = {
 	summary: string;
 };
 
-export const PMF_AS_OF = "August 18, 2026";
+export const PMF_AS_OF = "August 20, 2026";
 
 export const TIER_LABEL: Record<Tier, string> = {
 	green: "Generally permitted (no state serialization mandate)",
