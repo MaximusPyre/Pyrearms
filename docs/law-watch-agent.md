@@ -2,7 +2,13 @@
 
 Daily Cursor automation on `MaximusPyre/Pyrearms` (`main`). Education only — never legal advice. Phonebook Worker stays file-free.
 
-**Do not use this agent to scrape 50 state legislatures.** That is a cheap LegiScan cron: `docs/state-legislation-watch.md` and `.github/workflows/state-pmf-watch.yml`. Keep this agent narrow so it stays affordable.
+**Schedule tip:** Do **not** run at `:00` (especially 9:00 AM). Cursor rate-limits automations when too many concurrent cloud runs start on the hour. Prefer an off-peak minute (e.g. **9:17 AM EDT** or **2:23 PM EDT**).
+
+**Do not scrape 50 state legislatures in this agent.** That is a cheap LegiScan cron: `docs/state-legislation-watch.md` and `.github/workflows/state-pmf-watch.yml`. This agent writes **one blog article per run**.
+
+## Goal
+
+Ship **one public blog post every day** that drives people to the state map and keeps the desk alive. Prefer real court/ATF news when it exists; on quiet days write a short evergreen explainer — never a “verified, no change” stub.
 
 ## Always check (federal + courts — not a 50-state bill dump)
 
@@ -16,21 +22,33 @@ Scan for **new or moved** U.S. firearms legal actions, including:
 
 Do **not** treat advocacy blogs, Fox, or membership emails as the last word. Quote the order.
 
-## When something material happens
+## Every run (required)
 
-Write a **full public blog article**, not a dump of verify notes.
+Write **exactly one** new entry at the top of `BLOG_POSTS` in `src/data/lawBlog.ts`.
 
-1. Prepend a new entry in `src/data/lawBlog.ts` (`BLOG_POSTS`) with:
-   - URL-safe `slug` (news headline style)
-   - `title`, one-line `dek`, `date` / `publishedAt`
-   - `tags` (court, statute family)
-   - `blocks`: short news paragraphs, `h2` sections (What the court held / Who is covered / What this is not / Bottom line), optional `quote` from the opinion, closing disclaimer
-   - `sources`: RECAP / GovInfo / official org pages only
-2. Set or update an **active** banner in `src/data/lawAlerts.ts` with `href` pointing at `/blog/<slug>`. Retire stale alerts (`active: false`) when stayed, reversed, or superseded.
-3. Update `src/pages/Legal.tsx` (and map data in `src/data/pmfStates.ts`) only when the holding or statute actually changes the educational summary.
-4. Open **one PR** on `main`.
+### A) Material news day
 
-Tone: readable news desk (clear who/what/when/coverage limits), not a docket dump and not a membership pitch. Never claim a nationwide repeal when relief is party-specific.
+Full public article:
+
+1. URL-safe `slug`, news-style `title`, one-line `dek`, `date` / `publishedAt` (today)
+2. Optional `hook` (one sharp line for cards / home)
+3. `tags`, `blocks` (`p` / `h2` / optional `ul` / `quote` / one `cta` to `/map` / optional mid-article `{ type: "ad" }`)
+4. `sources`: RECAP / GovInfo / official pages only
+5. Set an **active** banner in `src/data/lawAlerts.ts` with `href` → `/blog/<slug>`. Retire stale alerts (`active: false`) when stayed, reversed, or superseded.
+6. Update `src/pages/Legal.tsx` and/or `src/data/pmfStates.ts` only when the holding or statute actually changes the educational summary.
+
+### B) Quiet day (no material new action)
+
+Still publish — do **not** silent no-op, and do **not** write “Verified — no material new action.”
+
+Write a short evergreen post (600–900 words) that:
+
+- Answers one concrete reader question (e.g. unfinished frames vs kits, party-specific injunctions, serialization, suppressor + state ban interaction)
+- Links hard to `/map` via a `cta` block
+- Cites existing primary sources already on the site or stable eCFR / ATF pages
+- Does **not** invent new court holdings
+
+Skip `lawAlerts.ts` unless you are retiring a stale alert.
 
 ## Scope language (copy this discipline)
 
@@ -38,8 +56,11 @@ If a court limits relief to **named plaintiffs, members, and customers (current 
 
 ## Membership / customer coverage
 
-When an injunction is party-specific, list **named organizational plaintiffs** people can actually join (with official join URLs) and **named commercial plaintiffs** whose *customers* the order mentions — plus the court’s limits (e.g. only transactions with those plaintiffs). Do not invent extra groups.
+When an injunction is party-specific, list **named organizational plaintiffs** people can actually join (with official join URLs) and **named commercial plaintiffs** whose *customers* the order mentions — plus the court’s limits. Do not invent extra groups.
 
-## No-change days
+## PR rules
 
-**Do not open a PR.** Do not prepend “Verified — no material new action” posts to the public blog. Those notes made the watch page unreadable. Silent no-op is correct. Do not bump `PMF_AS_OF` unless the fifty-state map was re-verified. Do not open a 50-state scrape PR from this agent.
+- Open **one PR** on `main` with the new blog entry (and alert/map edits if any).
+- Never open a 50-state scrape PR from this agent.
+- Never bump `PMF_AS_OF` unless the fifty-state map was actually re-verified.
+- Tone: readable news desk. Not a docket dump, not a membership pitch.
