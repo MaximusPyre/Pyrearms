@@ -106,78 +106,72 @@ export function BlogPost() {
 	if (!post) return <Navigate to="/blog" replace />;
 
 	return (
-		<div className="blog-shell">
-			<AdSlot slot="rail-left" className="blog-rail" />
-
-			<article className="page blog-article">
-				<div className="page-head">
-					<p className="eyebrow">
-						<Link to="/blog">Blog</Link> · {post.date} ·{" "}
-						{readingMinutes(post)} min read
-					</p>
-					<h1>{post.title}</h1>
-					{post.hook ? <p className="blog-hook">{post.hook}</p> : null}
-					<p className="lede">{post.dek}</p>
-					<p className="blog-tags">
-						{post.tags.map((t) => (
-							<span key={t}>{t}</span>
-						))}
-					</p>
-					<ShareRow post={post} />
-				</div>
-
-				<div className="prose blog-body">
-					{post.blocks.map((block, i) => (
-						<Block key={i} block={block} />
+		<article className="page blog-article">
+			<div className="page-head">
+				<p className="eyebrow">
+					<Link to="/blog">Blog</Link> · {post.date} ·{" "}
+					{readingMinutes(post)} min read
+				</p>
+				<h1>{post.title}</h1>
+				{post.hook ? <p className="blog-hook">{post.hook}</p> : null}
+				<p className="lede">{post.dek}</p>
+				<p className="blog-tags">
+					{post.tags.map((t) => (
+						<span key={t}>{t}</span>
 					))}
+				</p>
+				<ShareRow post={post} />
+			</div>
 
-					<h2>Primary sources</h2>
+			<div className="prose blog-body">
+				{post.blocks.map((block, i) => (
+					<Block key={i} block={block} />
+				))}
+
+				<h2>Primary sources</h2>
+				<ul>
+					{post.sources.map((s) => (
+						<li key={s.url}>
+							<a href={s.url} target="_blank" rel="noreferrer">
+								{s.label}
+							</a>
+						</li>
+					))}
+				</ul>
+			</div>
+
+			<aside className="blog-map-promo">
+				<h2>Done reading? Check your state.</h2>
+				<p>
+					Injunctions are federal and often party-specific. Your state’s
+					serialization and possession rules are still on the map.
+				</p>
+				<Link className="btn btn-primary" to="/map">
+					Open the PMF map
+				</Link>
+			</aside>
+
+			{related.length > 0 ? (
+				<section className="blog-related">
+					<h2>Keep reading</h2>
 					<ul>
-						{post.sources.map((s) => (
-							<li key={s.url}>
-								<a href={s.url} target="_blank" rel="noreferrer">
-									{s.label}
-								</a>
+						{related.map((r) => (
+							<li key={r.slug}>
+								<Link to={`/blog/${r.slug}`}>{r.title}</Link>
+								<span>{readingMinutes(r)} min</span>
 							</li>
 						))}
 					</ul>
-				</div>
+				</section>
+			) : null}
 
-				<aside className="blog-map-promo">
-					<h2>Done reading? Check your state.</h2>
-					<p>
-						Injunctions are federal and often party-specific. Your state’s
-						serialization and possession rules are still on the map.
-					</p>
-					<Link className="btn btn-primary" to="/map">
-						Open the PMF map
-					</Link>
-				</aside>
-
-				{related.length > 0 ? (
-					<section className="blog-related">
-						<h2>Keep reading</h2>
-						<ul>
-							{related.map((r) => (
-								<li key={r.slug}>
-									<Link to={`/blog/${r.slug}`}>{r.title}</Link>
-									<span>{readingMinutes(r)} min</span>
-								</li>
-							))}
-						</ul>
-					</section>
-				) : null}
-
-				<p className="blog-back">
-					<Link to="/blog">← All articles</Link>
-					{" · "}
-					<Link to="/map">State map</Link>
-					{" · "}
-					<Link to="/law">Federal law</Link>
-				</p>
-			</article>
-
-			<AdSlot slot="rail-right" className="blog-rail" />
-		</div>
+			<p className="blog-back">
+				<Link to="/blog">← All articles</Link>
+				{" · "}
+				<Link to="/map">State map</Link>
+				{" · "}
+				<Link to="/law">Federal law</Link>
+			</p>
+		</article>
 	);
 }

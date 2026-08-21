@@ -1,18 +1,22 @@
-/** Reserved slots for ad networks. Empty until a network is wired. */
+/**
+ * Reserved inline slots for a future ad network.
+ * Avoid "ad" in structural class names — blockers hide them and can collapse
+ * surrounding CSS grid tracks.
+ */
 export function AdSlot({
 	slot,
 	className = "",
 }: {
-	slot: "rail-left" | "rail-right" | "inline" | "index-mid";
+	slot: "inline" | "index-mid";
 	className?: string;
 }) {
 	return (
 		<aside
-			className={`ad-slot ad-slot-${slot} ${className}`.trim()}
-			data-ad-slot={slot}
-			aria-label="Advertisement"
+			className={`promo-slot promo-slot-${slot} ${className}`.trim()}
+			data-promo-slot={slot}
+			aria-hidden="true"
 		>
-			<span className="ad-slot-label">Ad</span>
+			<span className="promo-slot-label">Sponsor</span>
 		</aside>
 	);
 }
