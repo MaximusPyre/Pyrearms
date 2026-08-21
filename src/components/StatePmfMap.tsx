@@ -27,7 +27,7 @@ function labelAxis(v: YesNoUnclear): string {
 	return "Unclear";
 }
 
-export function StatePmfMap() {
+export function StatePmfMap({ standalone = false }: { standalone?: boolean }) {
 	const hostRef = useRef<HTMLDivElement>(null);
 	const [selected, setSelected] = useState<StatePmfRecord>(
 		() => getState("PA") || PMF_STATES[0],
@@ -74,16 +74,20 @@ export function StatePmfMap() {
 	}, [selected, colored]);
 
 	return (
-		<div className="pmf-map">
-			<header className="pmf-map-head">
-				<h2>Status of Privately Made Firearms by State</h2>
-				<p className="pmf-asof">As of {PMF_AS_OF}</p>
-				<p className="lede">
-					Not a red/green binary. Open a state to see serialization, registration,
-					precursor, 3D-print, and transfer axes. Classifications are provisional —
-					prefer the linked primary sources.
-				</p>
-			</header>
+		<div className={`pmf-map${standalone ? " pmf-map-standalone" : ""}`}>
+			{!standalone ? (
+				<header className="pmf-map-head">
+					<h2>Status of Privately Made Firearms by State</h2>
+					<p className="pmf-asof">As of {PMF_AS_OF}</p>
+					<p className="lede">
+						Not a red/green binary. Open a state to see serialization,
+						registration, precursor, 3D-print, and transfer axes.
+						Classifications are provisional — prefer the linked primary sources.
+					</p>
+				</header>
+			) : (
+				<p className="pmf-asof map-asof-inline">As of {PMF_AS_OF}</p>
+			)}
 
 			<ul className="pmf-legend">
 				{(Object.keys(TIER_LABEL) as Tier[]).map((tier) => (

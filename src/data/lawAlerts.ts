@@ -11,6 +11,16 @@ export type LawAlert = {
 /** Homepage / law-page banners. Point to full blog articles. Newest first. */
 export const LAW_ALERTS: LawAlert[] = [
 	{
+		id: "2026-08-state-trap",
+		date: "August 21, 2026",
+		kicker: "Blog · retention",
+		title: "Texas won the headlines. Your state still owns the stop.",
+		summary:
+			"Two party-specific injunctions are real — and they do not erase state unfinished-frame bans. Read the trap, then open the map.",
+		href: "/blog/texas-won-headlines-your-state-still-owns-you",
+		active: true,
+	},
+	{
 		id: "2026-08-frame-receiver",
 		date: "August 18, 2026",
 		kicker: "Federal court · N.D. Texas",
@@ -30,6 +40,6 @@ export const LAW_ALERTS: LawAlert[] = [
 		summary:
 			"Silencer Shop Foundation v. ATF (consolidated with Jensen v. ATF). Judge Hendrix, Aug. 5, 2026; seven-day stay lapsed Aug. 13. Not a nationwide NFA repeal.",
 		href: "/blog/texas-judge-enjoins-nfa-registration-for-untaxed-suppressors",
-		active: true,
+		active: false,
 	},
 ];

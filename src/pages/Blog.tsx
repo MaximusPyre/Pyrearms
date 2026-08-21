@@ -1,24 +1,57 @@
 import { Link } from "react-router-dom";
-import { BLOG_POSTS } from "../data/lawBlog";
+import { AdSlot } from "../components/AdSlot";
+import { BLOG_POSTS, readingMinutes } from "../data/lawBlog";
+import { usePageMeta } from "../lib/pageMeta";
 
 export function Blog() {
+	usePageMeta({
+		title: "Blog — court rulings & state traps · PyreArms",
+		description:
+			"Full articles on federal firearms rulings that move the board — who is covered, what is not, and why your state still matters. Education, not legal advice.",
+		path: "/blog",
+	});
+
+	const [featured, ...rest] = BLOG_POSTS;
+
 	return (
 		<section className="page blog-index">
 			<div className="page-head">
-				<p className="eyebrow">PyreArms · Court &amp; statute desk</p>
+				<p className="eyebrow">Court &amp; statute desk</p>
 				<h1>Blog</h1>
 				<p className="lede">
-					Full articles on federal firearms rulings that actually move the
-					board — captions, who is covered, what is not, and links to the
-					orders. Education, not legal advice.
+					Stories that keep you reading — then send you to the map. Captions,
+					coverage limits, and the traps victory posts skip.
 				</p>
 			</div>
 
+			{featured ? (
+				<article className="blog-featured">
+					<p className="eyebrow">
+						Featured · {featured.date} · {readingMinutes(featured)} min read
+					</p>
+					<h2>
+						<Link to={`/blog/${featured.slug}`}>{featured.title}</Link>
+					</h2>
+					{featured.hook ? <p className="blog-hook">{featured.hook}</p> : null}
+					<p className="blog-dek">{featured.dek}</p>
+					<div className="blog-featured-actions">
+						<Link className="btn btn-primary" to={`/blog/${featured.slug}`}>
+							Read now
+						</Link>
+						<Link className="btn btn-ghost" to="/map">
+							Open the map
+						</Link>
+					</div>
+				</article>
+			) : null}
+
+			<AdSlot slot="index-mid" />
+
 			<div className="blog-list">
-				{BLOG_POSTS.map((post) => (
+				{rest.map((post) => (
 					<article key={post.slug} className="blog-card">
 						<p className="eyebrow">
-							{post.date}
+							{post.date} · {readingMinutes(post)} min
 							{post.tags[0] ? ` · ${post.tags[0]}` : ""}
 						</p>
 						<h2>
@@ -31,16 +64,22 @@ export function Blog() {
 							))}
 						</p>
 						<Link className="text-link" to={`/blog/${post.slug}`}>
-							Read the article →
+							Continue reading →
 						</Link>
 					</article>
 				))}
 			</div>
 
-			<p className="fine-print blog-index-foot">
-				Looking for the fifty-state map?{" "}
-				<Link to="/law">Federal PMF law &amp; state status</Link>.
-			</p>
+			<aside className="blog-map-promo">
+				<h2>Still wondering about your state?</h2>
+				<p>
+					Federal headlines travel. Felonies stay local. Click your state, print
+					a card, come back when the next order drops.
+				</p>
+				<Link className="btn btn-primary" to="/map">
+					Open the PMF map
+				</Link>
+			</aside>
 		</section>
 	);
 }

@@ -12,6 +12,7 @@ export function Footer() {
 				PyreLink is MIT licensed.
 			</p>
 			<div className="footer-links">
+				<Link to="/map">State map</Link>
 				<Link to="/law">Federal law</Link>
 				<Link to="/blog">Blog</Link>
 				<Link to="/download">Download PyreLink</Link>

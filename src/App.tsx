@@ -9,6 +9,7 @@ import { Home } from "./pages/Home";
 import { Blog } from "./pages/Blog";
 import { BlogPost } from "./pages/BlogPost";
 import { Legal } from "./pages/Legal";
+import { StateMapPage } from "./pages/StateMapPage";
 import { StateLaw } from "./pages/StateLaw";
 import { LinkHub } from "./pages/LinkHub";
 import "./index.css";
@@ -32,7 +33,9 @@ export default function App() {
 						<Route path="/" element={<Home />} />
 						<Route path="/story" element={<Navigate to="/" replace />} />
 						<Route path="/law" element={<Legal />} />
+						<Route path="/map" element={<StateMapPage />} />
 						<Route path="/law/:state" element={<StateLaw />} />
+						<Route path="/states" element={<Navigate to="/map" replace />} />
 						<Route path="/blog" element={<Blog />} />
 						<Route path="/blog/:slug" element={<BlogPost />} />
 						<Route path="/legal" element={<Navigate to="/law" replace />} />

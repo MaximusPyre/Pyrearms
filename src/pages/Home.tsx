@@ -6,11 +6,7 @@ export function Home() {
 	return (
 		<>
 			<section className="hero">
-				<img
-					className="hero-visual"
-					src="/brand/hero-bg.jpg"
-					alt=""
-				/>
+				<img className="hero-visual" src="/brand/hero-bg.jpg" alt="" />
 				<div className="hero-glow" aria-hidden="true" />
 				<Embers />
 				<div className="hero-copy">
@@ -21,11 +17,11 @@ export function Home() {
 						education, and PyreLink — open peer share for advocates.
 					</p>
 					<div className="hero-actions">
-						<Link className="btn btn-primary" to="/law">
-							Read federal law
+						<Link className="btn btn-primary" to="/map">
+							Open the state map
 						</Link>
-						<Link className="btn btn-ghost" to="/download">
-							Get PyreLink
+						<Link className="btn btn-ghost" to="/blog">
+							Read the blog
 						</Link>
 					</div>
 				</div>
@@ -35,36 +31,37 @@ export function Home() {
 
 			<section className="section band">
 				<div className="section-inner">
-					<h2>Know the statute</h2>
+					<h2>Headlines lie by omission</h2>
 					<p>
-						Media says “ghost guns.” ATF publishes the rules for privately made
-						firearms. PyreArms points at primary sources.
+						Texas injunctions made the news. Your state’s unfinished-frame and
+						serialization rules still decide the stop. Click the map before you
+						trust a screenshot.
 					</p>
-					<Link className="text-link" to="/law">
-						Open the law page →
+					<Link className="text-link" to="/map">
+						Open the fifty-state map →
 					</Link>
 				</div>
 			</section>
 
 			<section className="section twin">
 				<article>
-					<h2>ATF sources</h2>
+					<h2>Blog</h2>
 					<p>
-						Personal manufacture without a license, PMF overview, and hard
-						limits that still apply.
+						Full articles on who is covered, what is not, and the traps victory
+						posts skip — then a hard link back to the map.
 					</p>
-					<Link className="btn btn-primary" to="/law">
-						Federal law
+					<Link className="btn btn-primary" to="/blog">
+						Latest articles
 					</Link>
 				</article>
 				<article>
-					<h2>PyreLink</h2>
+					<h2>Federal statutes</h2>
 					<p>
-						Host a folder. Copy a share code. Others paste it and fetch
-						peer-to-peer — no central file dump on this site.
+						ATF PMF baseline, § 922(a)(1)(A), detectability, and NFA —
+						separate from the interactive map.
 					</p>
-					<Link className="btn btn-primary" to="/download">
-						Download
+					<Link className="btn btn-primary" to="/law">
+						Federal law
 					</Link>
 				</article>
 			</section>

@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { LawAlertBanner } from "../components/LawAlertBanner";
-import { StatePmfMap } from "../components/StatePmfMap";
 
 export function Legal() {
 	return (
@@ -212,8 +211,9 @@ export function Legal() {
 						as never having had one).
 					</li>
 					<li>
-						State overlays can be stricter than federal baseline — see the map
-						and the <Link to="/blog">blog</Link>.
+						State overlays can be stricter than federal baseline — see the{" "}
+						<Link to="/map">state map</Link> and the{" "}
+						<Link to="/blog">blog</Link>.
 					</li>
 				</ul>
 
@@ -402,14 +402,16 @@ export function Legal() {
 					act.
 				</p>
 
-				<h2>State cards</h2>
+				<h2>State map &amp; pocket cards</h2>
 				<p>
-					Every state has a reference page and a printable 3.5″ × 2″ statute
-					card — federal cites plus that state’s overlay — so you are pointing
-					at the code instead of arguing from memory. Open a state on the map
-					or go to{" "}
-					<Link to="/law/pa">/law/pa</Link> (any two-letter code). Not a permit.
-					Not legal advice.
+					The interactive fifty-state map lives on its own page — click a state,
+					read the axes, print a 3.5″ × 2″ statute card. Federal injunctions do
+					not erase state bans.
+				</p>
+				<p>
+					<Link className="btn btn-primary" to="/map">
+						Open the PMF map
+					</Link>
 				</p>
 
 				<h2>Disclaimer</h2>
@@ -419,8 +421,6 @@ export function Legal() {
 					compliance where you live and travel.
 				</p>
 			</div>
-
-			<StatePmfMap />
 		</section>
 	);
 }

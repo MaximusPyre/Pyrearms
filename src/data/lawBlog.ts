@@ -2,24 +2,151 @@ export type BlogBlock =
 	| { type: "p"; text: string }
 	| { type: "h2"; text: string }
 	| { type: "ul"; items: string[] }
-	| { type: "quote"; text: string; cite?: string };
+	| { type: "quote"; text: string; cite?: string }
+	| { type: "ad" }
+	| {
+			type: "cta";
+			title: string;
+			body: string;
+			href: string;
+			label: string;
+	  };
 
 export type BlogPost = {
 	slug: string;
-	/** Display date */
 	date: string;
-	/** ISO date for sorting */
 	publishedAt: string;
 	title: string;
-	/** One-line deck under the headline */
 	dek: string;
 	tags: string[];
+	/** Optional hook line shown above the dek on the index card */
+	hook?: string;
 	sources: { label: string; url: string }[];
 	blocks: BlogBlock[];
 };
 
+export function readingMinutes(post: BlogPost) {
+	const words = post.blocks.reduce((n, b) => {
+		if (b.type === "p" || b.type === "h2" || b.type === "quote") {
+			return n + b.text.split(/\s+/).length;
+		}
+		if (b.type === "ul") {
+			return n + b.items.join(" ").split(/\s+/).length;
+		}
+		if (b.type === "cta") {
+			return n + `${b.title} ${b.body}`.split(/\s+/).length;
+		}
+		return n;
+	}, 0);
+	return Math.max(1, Math.round(words / 220));
+}
+
+export function relatedPosts(slug: string, limit = 2) {
+	return BLOG_POSTS.filter((p) => p.slug !== slug).slice(0, limit);
+}
+
 /** Public blog — full articles only. Newest first. No daily “verified” spam. */
 export const BLOG_POSTS: BlogPost[] = [
+	{
+		slug: "texas-won-headlines-your-state-still-owns-you",
+		date: "August 21, 2026",
+		publishedAt: "2026-08-21",
+		title:
+			"Texas won the headlines. Your state still owns the stop.",
+		hook: "If you only read the victory posts, you are one bad traffic stop from finding out why that is not enough.",
+		dek: "Two August 2026 Northern District of Texas injunctions are real — and party-specific. Here is how people misread them, what actually travels across a state line, and the five-minute map check that keeps you out of the trap.",
+		tags: ["PMF", "state law", "NFA", "retention", "map"],
+		sources: [
+			{
+				label: "Frame/receiver opinion (Dkt. 330)",
+				url: "https://storage.courtlistener.com/recap/gov.uscourts.txnd.366145/gov.uscourts.txnd.366145.330.0.pdf",
+			},
+			{
+				label: "NFA judgment (Dkt. 137)",
+				url: "https://storage.courtlistener.com/recap/gov.uscourts.txnd.406278/gov.uscourts.txnd.406278.137.0_1.pdf",
+			},
+			{
+				label: "PyreArms state map",
+				url: "https://pyrearms.dev/map",
+			},
+		],
+		blocks: [
+			{
+				type: "p",
+				text: "You have seen the screenshots. “Judge nukes ATF ghost-gun rule.” “NFA registration dead.” Group chats light up. Someone posts a membership link. Someone else posts a shopping cart.",
+			},
+			{
+				type: "p",
+				text: "None of that is fake. Chief Judge Reed O’Connor really did enjoin key pieces of the 2022 frame-and-receiver rule for Defense Distributed, the Second Amendment Foundation, and SAF members — on named Defense Distributed products. Judge James Wesley Hendrix really did permanently enjoin NFA registration machinery for certain untaxed items for covered plaintiffs, members, and customers. The PDFs are on RECAP. We wrote them up.",
+			},
+			{
+				type: "p",
+				text: "Here is the part the victory posts bury in paragraph fourteen: those orders are not a hall pass you carry into California, New York, Illinois, New Jersey, Washington, or half a dozen other states that already wrote unfinished-frame and unserialized-possession felonies into their own codes. A Texas injunction against ATF does not repeal a state statute. A membership in an organizational plaintiff does not rewrite your state’s criminal code. And “customers — current and future” means what the judgment says it means, not what a comment section hopes it means.",
+			},
+			{
+				type: "h2",
+				text: "The trap in one sentence",
+			},
+			{
+				type: "p",
+				text: "People treat a party-specific federal injunction like a nationwide repeal, then discover — usually with lights in the mirror — that their state never needed ATF’s rule to charge them.",
+			},
+			{
+				type: "h2",
+				text: "Three ways smart people get this wrong",
+			},
+			{
+				type: "ul",
+				items: [
+					"They skip the coverage list. If you are not SAF (for the frame rule) or not a named plaintiff / member / covered customer (for the NFA ruling), the order is not your shield.",
+					"They ignore product limits. O’Connor’s permanent injunction names Defense Distributed’s M1911 80% Frames and G80 kit lines — not every unfinished frame on the internet.",
+					"They forget the map. State serialization, possession, unfinished-frame, and 3D-print bans keep running whether or not ATF can enforce §§ 478.11 and 478.12(c) against someone else.",
+				],
+			},
+			{ type: "ad" },
+			{
+				type: "h2",
+				text: "What you should do in the next five minutes",
+			},
+			{
+				type: "ul",
+				items: [
+					"Open the PyreArms state map. Click your state. Read manufacture, serialize, possess, 3D-print — not just the color.",
+					"If you travel, click the states you drive through. Color changes at the border; so do felonies.",
+					"Print the pocket statute card for your home state if you want the cites in your wallet. It is not a permit. It is so you are not arguing from memory.",
+					"Read the actual articles on the two Texas rulings before you forward another screenshot.",
+					"If a case matters to you personally, talk to a lawyer in that jurisdiction. We publish education. We do not represent you.",
+				],
+			},
+			{
+				type: "cta",
+				title: "Check your state before you trust a headline",
+				body: "The map is the retention product. Click once, come back when the next injunction drops, print a card when you travel.",
+				href: "/map",
+				label: "Open the PMF map",
+			},
+			{
+				type: "h2",
+				text: "Why we built the map as its own page",
+			},
+			{
+				type: "p",
+				text: "Federal law is the shared baseline. State overlays are where most people actually get hurt. Burying the map under a wall of federal statute text made people bounce. So the map is now a first-class page: click a state, read the axes, print a card, open the full state writeup. The blog explains the drama. The map answers “what about me?”",
+			},
+			{
+				type: "h2",
+				text: "Bottom line",
+			},
+			{
+				type: "p",
+				text: "Celebrate the wins. Read the coverage language. Then open the map. If that feels less exciting than a victory post, good — excitement is how people skip the part that keeps them free.",
+			},
+			{
+				type: "p",
+				text: "PyreArms is a collective for statute education. This article is not legal advice and does not create an attorney-client relationship.",
+			},
+		],
+	},
 	{
 		slug: "texas-judge-blocks-atf-frame-receiver-rule-for-saf-members",
 		date: "August 18, 2026",
@@ -55,6 +182,7 @@ export const BLOG_POSTS: BlogPost[] = [
 				type: "p",
 				text: "Chief Judge Reed O’Connor of the U.S. District Court for the Northern District of Texas issued his opinion on August 17, 2026, in VanDerStok / Defense Distributed v. Blanche, No. 4:22-cv-00691-O. Final judgment followed on August 18. There is no stay in the judgment.",
 			},
+			{ type: "ad" },
 			{
 				type: "h2",
 				text: "What the court held",
@@ -105,6 +233,13 @@ export const BLOG_POSTS: BlogPost[] = [
 			{
 				type: "p",
 				text: "The Justice Department can still appeal. People who are not SAF members dealing in other companies’ unfinished frames should not treat this order as their shield.",
+			},
+			{
+				type: "cta",
+				title: "Does your state still ban unfinished frames?",
+				body: "This injunction is federal and party-specific. Open the map before you assume the rule is gone where you live.",
+				href: "/map",
+				label: "Check the state map",
 			},
 			{
 				type: "h2",
@@ -163,6 +298,7 @@ export const BLOG_POSTS: BlogPost[] = [
 				type: "p",
 				text: "The court also refused a universal injunction. Citing Supreme Court limits on relief to non-parties, Hendrix confined the permanent injunction to the plaintiffs and, where applicable, their agencies, political subdivisions, members, and customers — current and future.",
 			},
+			{ type: "ad" },
 			{
 				type: "h2",
 				text: "Who the order actually covers",
@@ -188,6 +324,13 @@ export const BLOG_POSTS: BlogPost[] = [
 					"NFA regulation of items and parties outside the injunction’s text.",
 					"DOJ’s ability to take a conventional appeal.",
 				],
+			},
+			{
+				type: "cta",
+				title: "State suppressor bans still apply",
+				body: "This injunction does not rewrite state law. Check your state on the map, then read the judgment coverage language again.",
+				href: "/map",
+				label: "Open the state map",
 			},
 			{
 				type: "h2",
