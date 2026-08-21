@@ -8,7 +8,13 @@ Daily Cursor automation on `MaximusPyre/Pyrearms` (`main`). Education only — n
 
 ## Goal
 
-Ship **one public blog post every day** that drives people to the state map and keeps the desk alive. Prefer real court/ATF news when it exists; on quiet days write a short evergreen explainer — never a “verified, no change” stub.
+**One blog post per day. Always.**
+
+1. If there is material court / ATF / federal news → write that.
+2. If not → **find a related topic** readers still need and write that.
+3. Never publish “nothing happened,” “verified no change,” or a status stub.
+
+Quiet-day posts still count as real articles: a useful angle on PMF / NFA / state rules that ends at the map.
 
 ## Always check (federal + courts — not a 50-state bill dump)
 
@@ -37,16 +43,23 @@ Full public article:
 5. Set an **active** banner in `src/data/lawAlerts.ts` with `href` → `/blog/<slug>`. Retire stale alerts (`active: false`) when stayed, reversed, or superseded.
 6. Update `src/pages/Legal.tsx` and/or `src/data/pmfStates.ts` only when the holding or statute actually changes the educational summary.
 
-### B) Quiet day (no material new action)
+### B) Quiet day — pick a related topic
 
-Still publish — do **not** silent no-op, and do **not** write “Verified — no material new action.”
+Still publish. Do **not** silent no-op. Do **not** write that nothing happened.
 
-Write a short evergreen post (600–900 words) that:
+**How to choose the topic** (pick one; avoid repeating a slug or near-duplicate title already in `BLOG_POSTS`):
 
-- Answers one concrete reader question (e.g. unfinished frames vs kits, party-specific injunctions, serialization, suppressor + state ban interaction)
-- Links hard to `/map` via a `cta` block
-- Cites existing primary sources already on the site or stable eCFR / ATF pages
-- Does **not** invent new court holdings
+1. Deepen a recent news post (coverage traps, who is / isn’t a party, what state law still does)
+2. Spotlight one hard state from `src/data/pmfStates.ts` (serialization, unfinished-frame ban, possession) and send readers to `/map` + `/law/<state>`
+3. Explain a recurring confusion (frame vs receiver kit, polymer80-era rules vs current eCFR, Form 1 vs Form 4 after a tax change, suppressor + state ban, detectability, interstate travel with a PMF)
+4. Walk a “five-minute map check” scenario tied to a real statute cite already on the site
+
+Write 600–900 words that:
+
+- Answers **one** concrete question in the headline
+- Includes a `cta` block to `/map` (and state page when relevant)
+- Cites stable primary sources (eCFR, ATF, RECAP PDFs already linked on the site) — do **not** invent holdings
+- Reads like a desk explainer, not a changelog
 
 Skip `lawAlerts.ts` unless you are retiring a stale alert.
 
