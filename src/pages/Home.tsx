@@ -1,8 +1,19 @@
 import { Link } from "react-router-dom";
 import { LawAlertBanner } from "../components/LawAlertBanner";
 import { Embers } from "../components/Embers";
+import { BLOG_POSTS, readingMinutes } from "../data/lawBlog";
+import { usePageMeta } from "../lib/pageMeta";
 
 export function Home() {
+	usePageMeta({
+		title: "PyreArms — state PMF map & court desk",
+		description:
+			"Click your state for unfinished-frame and serialization rules. Read the rulings that actually move coverage. Education, not legal advice.",
+		path: "/",
+	});
+
+	const latest = BLOG_POSTS[0];
+
 	return (
 		<>
 			<section className="hero">
@@ -11,10 +22,10 @@ export function Home() {
 				<Embers />
 				<div className="hero-copy">
 					<p className="hero-kicker">United States · Second Amendment</p>
-					<h1 className="visually-hidden">PyreArms</h1>
+					<h1 className="hero-brand">PyreArms</h1>
 					<p className="hero-lead">
-						PyreArms is a collective for federal privately made firearm law
-						education, and PyreLink — open peer share for advocates.
+						Click your state. Read the ruling. Come back when the next order
+						drops.
 					</p>
 					<div className="hero-actions">
 						<Link className="btn btn-primary" to="/map">
@@ -27,41 +38,70 @@ export function Home() {
 				</div>
 			</section>
 
-			<LawAlertBanner />
+			<LawAlertBanner limit={1} />
 
-			<section className="section band">
+			<section className="section band home-loop">
 				<div className="section-inner">
-					<h2>Headlines lie by omission</h2>
+					<p className="eyebrow">The loop</p>
+					<h2>Map first. Headline second.</h2>
 					<p>
-						Texas injunctions made the news. Your state’s unfinished-frame and
-						serialization rules still decide the stop. Click the map before you
-						trust a screenshot.
+						Federal injunctions get screenshots. State unfinished-frame and
+						serialization rules still decide the stop. The map is why people
+						return — the blog is how they know what changed.
 					</p>
-					<Link className="text-link" to="/map">
-						Open the fifty-state map →
-					</Link>
+					<div className="home-loop-actions">
+						<Link className="btn btn-primary" to="/map">
+							Check my state
+						</Link>
+						<Link className="text-link" to="/law">
+							Federal baseline →
+						</Link>
+					</div>
 				</div>
 			</section>
 
-			<section className="section twin">
+			{latest ? (
+				<section className="section home-latest">
+					<div className="home-latest-inner">
+						<p className="eyebrow">
+							Latest · {latest.date} · {readingMinutes(latest)} min
+						</p>
+						<h2>
+							<Link to={`/blog/${latest.slug}`}>{latest.title}</Link>
+						</h2>
+						{latest.hook ? <p className="blog-hook">{latest.hook}</p> : null}
+						<p className="home-latest-dek">{latest.dek}</p>
+						<div className="home-loop-actions">
+							<Link className="btn btn-primary" to={`/blog/${latest.slug}`}>
+								Continue reading
+							</Link>
+							<Link className="btn btn-ghost" to="/blog">
+								All articles
+							</Link>
+						</div>
+					</div>
+				</section>
+			) : null}
+
+			<section className="section twin home-secondary">
 				<article>
-					<h2>Blog</h2>
+					<h2>Print a statute card</h2>
 					<p>
-						Full articles on who is covered, what is not, and the traps victory
-						posts skip — then a hard link back to the map.
+						Pick a state on the map, print the pocket cites, keep them with
+						you. Not a permit — so you are not arguing from memory.
 					</p>
-					<Link className="btn btn-primary" to="/blog">
-						Latest articles
+					<Link className="btn btn-ghost" to="/map">
+						Go to the map
 					</Link>
 				</article>
 				<article>
-					<h2>Federal statutes</h2>
+					<h2>PyreLink</h2>
 					<p>
-						ATF PMF baseline, § 922(a)(1)(A), detectability, and NFA —
-						separate from the interactive map.
+						Open peer share for advocates. Host a folder, copy a code, fetch
+						P2P — this site never holds your files.
 					</p>
-					<Link className="btn btn-primary" to="/law">
-						Federal law
+					<Link className="btn btn-ghost" to="/download">
+						Download
 					</Link>
 				</article>
 			</section>

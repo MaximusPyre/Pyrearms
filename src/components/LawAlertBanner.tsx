@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { LAW_ALERTS } from "../data/lawAlerts";
 
-export function LawAlertBanner() {
+export function LawAlertBanner({ limit }: { limit?: number }) {
 	const active = LAW_ALERTS.filter((a) => a.active);
-	if (!active.length) return null;
+	const shown = typeof limit === "number" ? active.slice(0, limit) : active;
+	if (!shown.length) return null;
 	return (
 		<div className="law-alerts">
-			{active.map((alert) => (
+			{shown.map((alert) => (
 				<article key={alert.id} className="law-alert">
 					<p className="eyebrow">
 						{alert.kicker} · {alert.date}
