@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { LawAlertBanner } from "../components/LawAlertBanner";
 import { StatePmfMap } from "../components/StatePmfMap";
 
@@ -212,7 +213,7 @@ export function Legal() {
 					</li>
 					<li>
 						State overlays can be stricter than federal baseline — see the map
-						and the <a href="/blog">law watch</a> log.
+						and the <Link to="/blog">blog</Link>.
 					</li>
 				</ul>
 
@@ -298,8 +299,12 @@ export function Legal() {
 					>
 						Final judgment (Dkt. 331, RECAP)
 					</a>
-					. See the <a href="/blog">law watch</a> post. Not legal advice —
-					verify coverage and your state’s law before you act.
+					. See the{" "}
+					<Link to="/blog/texas-judge-blocks-atf-frame-receiver-rule-for-saf-members">
+						full article
+					</Link>
+					. Not legal advice — verify coverage and your state’s law before you
+					act.
 				</p>
 
 				<h2 id="nfa-injunction">August 2026 NFA injunction (suppressors and more)</h2>
@@ -390,8 +395,21 @@ export function Legal() {
 						GOA case summary
 					</a>
 					. See the{" "}
-					<a href="/blog">law watch</a> post. Not legal advice — verify coverage
-					and your state’s law before you act.
+					<Link to="/blog/texas-judge-enjoins-nfa-registration-for-untaxed-suppressors">
+						full article
+					</Link>
+					. Not legal advice — verify coverage and your state’s law before you
+					act.
+				</p>
+
+				<h2>State cards</h2>
+				<p>
+					Every state has a reference page and a printable 3.5″ × 2″ statute
+					card — federal cites plus that state’s overlay — so you are pointing
+					at the code instead of arguing from memory. Open a state on the map
+					or go to{" "}
+					<Link to="/law/pa">/law/pa</Link> (any two-letter code). Not a permit.
+					Not legal advice.
 				</p>
 
 				<h2>Disclaimer</h2>

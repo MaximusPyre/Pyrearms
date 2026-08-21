@@ -1,45 +1,46 @@
 import { Link } from "react-router-dom";
-import { LAW_BLOG } from "../data/lawBlog";
-import { PMF_AS_OF } from "../data/pmfStates";
+import { BLOG_POSTS } from "../data/lawBlog";
 
 export function Blog() {
 	return (
-		<section className="page">
+		<section className="page blog-index">
 			<div className="page-head">
-				<p className="eyebrow">Law watch</p>
-				<h1>State PMF legislation</h1>
+				<p className="eyebrow">PyreArms · Court &amp; statute desk</p>
+				<h1>Blog</h1>
 				<p className="lede">
-					Dated notes when the fifty-state map is verified, a bill moves, or a
-					federal court / ATF action is material. Map as of {PMF_AS_OF}.
-					Education, not legal advice.
+					Full articles on federal firearms rulings that actually move the
+					board — captions, who is covered, what is not, and links to the
+					orders. Education, not legal advice.
 				</p>
 			</div>
 
-			<div className="prose">
-				{LAW_BLOG.length === 0 ? (
-					<p>
-						No watch posts yet. The daily check will log here when federal or
-						state PMF / ghost gun / 3D-printed firearm rules change — or when a
-						full fifty-state verify finds no change.
-					</p>
-				) : (
-					LAW_BLOG.map((post) => (
-						<article key={post.id} className="law-post">
-							<p className="eyebrow">{post.date}</p>
-							<h2>{post.title}</h2>
-							<p>{post.body}</p>
-							{post.changed.length > 0 ? (
-								<p>
-									<strong>Moved:</strong> {post.changed.join(", ")}
-								</p>
-							) : null}
-						</article>
-					))
-				)}
-				<p>
-					<Link to="/law">Open the state map</Link>
-				</p>
+			<div className="blog-list">
+				{BLOG_POSTS.map((post) => (
+					<article key={post.slug} className="blog-card">
+						<p className="eyebrow">
+							{post.date}
+							{post.tags[0] ? ` · ${post.tags[0]}` : ""}
+						</p>
+						<h2>
+							<Link to={`/blog/${post.slug}`}>{post.title}</Link>
+						</h2>
+						<p className="blog-dek">{post.dek}</p>
+						<p className="blog-tags">
+							{post.tags.map((t) => (
+								<span key={t}>{t}</span>
+							))}
+						</p>
+						<Link className="text-link" to={`/blog/${post.slug}`}>
+							Read the article →
+						</Link>
+					</article>
+				))}
 			</div>
+
+			<p className="fine-print blog-index-foot">
+				Looking for the fifty-state map?{" "}
+				<Link to="/law">Federal PMF law &amp; state status</Link>.
+			</p>
 		</section>
 	);
 }

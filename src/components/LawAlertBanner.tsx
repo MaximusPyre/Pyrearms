@@ -14,7 +14,7 @@ export function LawAlertBanner() {
 					<h2>{alert.title}</h2>
 					<p>{alert.summary}</p>
 					<Link className="text-link" to={alert.href}>
-						Read the watch note →
+						Read the article →
 					</Link>
 				</article>
 			))}

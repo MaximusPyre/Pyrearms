@@ -1,0 +1,45 @@
+name: State PMF bill watch
+
+# Cheap 50-state scrape (LegiScan, no Cursor agent / no LLM).
+# ~51 API calls per run. Add repo secret LEGISCAN_API_KEY (free at legiscan.com).
+
+on:
+  schedule:
+    - cron: "0 14 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Search LegiScan
+        env:
+          LEGISCAN_API_KEY: ${{ secrets.LEGISCAN_API_KEY }}
+        run: node scripts/state-pmf-watch.mjs
+      - name: Open PR if the bill list moved
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if git diff --quiet -- src/data/stateBills.generated.ts; then
+            echo "No bill-list changes."
+            exit 0
+          fi
+          branch="watch/state-bills-$(date -u +%Y%m%d)"
+          git checkout -b "$branch"
+          git add src/data/stateBills.generated.ts
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -m "Refresh LegiScan PMF / ghost-gun bill hits."
+          git push -u origin "$branch"
+          gh pr create --title "State PMF bill watch update" --body "$(cat <<'EOF'
+          Weekly LegiScan search for unserialized / ghost-gun / unfinished-frame / 3D-print bills.
+
+          Review titles before merging. This does not rewrite the fifty-state map — only the per-state bill list.
+          EOF
+          )"

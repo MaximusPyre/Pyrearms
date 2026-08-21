@@ -3,15 +3,26 @@ name: Deploy site
 on:
   push:
     branches: [main]
+  workflow_dispatch:
+  # GITHUB_TOKEN merges from Auto-merge do not fire `push` workflows.
+  # Redeploy when that job finishes successfully.
+  workflow_run:
+    workflows: ["Auto-merge Cursor PRs"]
+    types: [completed]
 
 permissions:
   contents: read
 
 jobs:
   deploy:
+    if: >
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-node@v4
         with:
           node-version: "22"

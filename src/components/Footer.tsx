@@ -13,7 +13,7 @@ export function Footer() {
 			</p>
 			<div className="footer-links">
 				<Link to="/law">Federal law</Link>
-				<Link to="/blog">Law watch</Link>
+				<Link to="/blog">Blog</Link>
 				<Link to="/download">Download PyreLink</Link>
 				<a
 					href="https://www.atf.gov/firearms/privately-made-firearms"

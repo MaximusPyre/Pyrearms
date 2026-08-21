@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useEffect, useMemo, useRef, useState } from "react";
 import mapSvg from "../assets/us-states.svg?raw";
 import {
@@ -5,6 +6,7 @@ import {
 	PMF_AS_OF,
 	PMF_STATES,
 	TIER_LABEL,
+	statePath,
 	type StatePmfRecord,
 	type Tier,
 	type YesNoUnclear,
@@ -146,6 +148,14 @@ export function StatePmfMap() {
 					</dl>
 					<p className="pmf-statute">
 						<strong>Source statute / note:</strong> {selected.statute}
+					</p>
+					<p className="pmf-card-links">
+						<Link className="btn btn-primary" to={`${statePath(selected)}#card`}>
+							Print {selected.name} card
+						</Link>
+						<Link className="btn btn-ghost" to={statePath(selected)}>
+							Full state page
+						</Link>
 					</p>
 					<p className="fine-print">
 						Effective note: {selected.effectiveNote} · Confidence:{" "}

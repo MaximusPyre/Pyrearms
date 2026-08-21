@@ -637,3 +637,24 @@ export const PMF_STATES: StatePmfRecord[] = STATES.sort((a, b) =>
 export function getState(code: string): StatePmfRecord | undefined {
 	return PMF_STATES.find((s) => s.code === code.toUpperCase());
 }
+
+export function stateSlug(name: string) {
+	return name
+		.toLowerCase()
+		.replace(/[^a-z0-9]+/g, "-")
+		.replace(/^-|-$/g, "");
+}
+
+export function statePath(rec: StatePmfRecord) {
+	return `/law/${rec.code.toLowerCase()}`;
+}
+
+export function findState(param: string): StatePmfRecord | undefined {
+	const p = decodeURIComponent(param).trim().toLowerCase();
+	if (p === "washington-dc" || p === "district-of-columbia") {
+		return getState("DC");
+	}
+	return PMF_STATES.find(
+		(s) => s.code.toLowerCase() === p || stateSlug(s.name) === p,
+	);
+}
