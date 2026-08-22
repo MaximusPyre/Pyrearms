@@ -100,6 +100,21 @@ label { color: var(--ink-dim); font-size: 0.88rem; }
 }
 input[type="password"] { font-size: 16px; }
 nav.desk-nav { display: flex; gap: 1rem; margin: 0 0 1.25rem; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 1.5rem;
+}
+@media (max-width: 640px) { .stats-grid { grid-template-columns: 1fr; } }
+.stat-block h2 {
+  margin: 1.75rem 0 0.35rem;
+  font-family: var(--font-display);
+  letter-spacing: 0.08em;
+  font-size: 1rem;
+}
+.stat-block .list { margin-top: 0.4rem; }
+.stat-block .list li { padding: 0.7rem 0; }
+.lede-tight { color: var(--ink-dim); line-height: 1.45; font-size: 0.92rem; }
 `;
 
 function page(title: string, body: string): string {
@@ -262,17 +277,65 @@ export function playerPage(id: string, title: string, origin: string): string {
 	);
 }
 
-export function hubStatsPage(
-	views: number,
-	clicks: Record<string, number>,
-	labels: Record<string, string>,
-): string {
-	const ids = [...new Set([...Object.keys(labels), ...Object.keys(clicks)])].sort();
-	const rows = ids
+export type HubStatsView = {
+	views: number;
+	clicks: Record<string, number>;
+	browsers: Record<string, number>;
+	os: Record<string, number>;
+	devices: Record<string, number>;
+	countries: Record<string, number>;
+	referrers: Record<string, number>;
+	languages: Record<string, number>;
+	recent: Array<{
+		t: string;
+		kind: string;
+		link: string;
+		browser: string;
+		os: string;
+		device: string;
+		country: string;
+		referrer: string;
+		language: string;
+	}>;
+};
+
+function countRows(map: Record<string, number>, total: number): string {
+	const rows = Object.entries(map).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+	if (!rows.length) return "<li class='lede'>None yet.</li>";
+	return rows
+		.map(([name, n]) => {
+			const pct = total > 0 ? Math.round((n / total) * 100) : 0;
+			return `<li><strong>${escapeHtml(name)}</strong> — ${n} <span class="lede">(${pct}%)</span></li>`;
+		})
+		.join("");
+}
+
+function fmtTime(iso: string): string {
+	const d = Date.parse(iso);
+	if (!Number.isFinite(d)) return iso;
+	return new Date(d).toISOString().replace("T", " ").replace(/\.\d+Z$/, " UTC");
+}
+
+export function hubStatsPage(stats: HubStatsView, labels: Record<string, string>): string {
+	const { views } = stats;
+	const ids = [...new Set([...Object.keys(labels), ...Object.keys(stats.clicks)])].sort();
+	const clickRows = ids
 		.map((id) => {
-			const n = clicks[id] || 0;
+			const n = stats.clicks[id] || 0;
 			const name = labels[id] || id;
 			return `<li><strong>${escapeHtml(name)}</strong> — ${n} click${n === 1 ? "" : "s"}</li>`;
+		})
+		.join("");
+	const recent = stats.recent
+		.map((row) => {
+			const action =
+				row.kind === "click"
+					? `clicked ${labels[row.link] || row.link || "link"}`
+					: "viewed hub";
+			const bits = [row.browser, row.os, row.device, row.country, row.language, row.referrer]
+				.filter(Boolean)
+				.join(" · ");
+			return `<li><strong>${escapeHtml(fmtTime(row.t))}</strong> — ${escapeHtml(action)}<br /><span class="lede-tight">${escapeHtml(bits)}</span></li>`;
 		})
 		.join("");
 	return page(
@@ -285,8 +348,41 @@ export function hubStatsPage(
     </nav>
     <p class="eyebrow">max.pyrearms.dev</p>
     <h1>Hub stats</h1>
-    <p class="lede">Page views: <strong>${views}</strong></p>
-    <ul class="list">${rows || "<li class='lede'>No clicks yet.</li>"}</ul>
+    <p class="lede">Page views: <strong>${views}</strong>. Breakdowns are from page views. No IP addresses or raw user-agents are stored.</p>
+    <div class="stat-block">
+      <h2>Clicks</h2>
+      <ul class="list">${clickRows || "<li class='lede'>No clicks yet.</li>"}</ul>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-block">
+        <h2>Browsers</h2>
+        <ul class="list">${countRows(stats.browsers, views)}</ul>
+      </div>
+      <div class="stat-block">
+        <h2>Operating systems</h2>
+        <ul class="list">${countRows(stats.os, views)}</ul>
+      </div>
+      <div class="stat-block">
+        <h2>Devices</h2>
+        <ul class="list">${countRows(stats.devices, views)}</ul>
+      </div>
+      <div class="stat-block">
+        <h2>Countries</h2>
+        <ul class="list">${countRows(stats.countries, views)}</ul>
+      </div>
+      <div class="stat-block">
+        <h2>Referrers</h2>
+        <ul class="list">${countRows(stats.referrers, views)}</ul>
+      </div>
+      <div class="stat-block">
+        <h2>Languages</h2>
+        <ul class="list">${countRows(stats.languages, views)}</ul>
+      </div>
+    </div>
+    <div class="stat-block">
+      <h2>Recent</h2>
+      <ul class="list">${recent || "<li class='lede'>No events yet.</li>"}</ul>
+    </div>
     <p class="lede">Counts start from when tracking went live. Refresh this page anytime.</p>
     <form method="post" action="/logout"><button type="submit">Log out</button></form>`,
 	);
