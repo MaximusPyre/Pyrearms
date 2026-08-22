@@ -22,6 +22,5 @@ export const HUB_LINKS: HubLink[] = [
 		href: "https://onlyfans.com/maximuspyre",
 		wip: true,
 	},
-	{ id: "tiktok", label: "TikTok", href: "https://www.tiktok.com/@maximusunbound" },
 	{ id: "snapchat", label: "Snapchat", href: "https://www.snapchat.com/add/maximuspyre" },
 ];
