@@ -48,6 +48,129 @@ export function relatedPosts(slug: string, limit = 2) {
 /** Public blog — full articles only. Newest first. No daily “verified” spam. */
 export const BLOG_POSTS: BlogPost[] = [
 	{
+		slug: "ninth-circuit-california-lacks-standing-to-expand-atf-receiver-rule",
+		date: "August 22, 2026",
+		publishedAt: "2026-08-22",
+		title:
+			"Ninth Circuit: California lacked standing to make ATF regulate more unfinished AR receivers",
+		hook: "The panel did not bless 80% receivers. It said the plaintiffs never proved Example 4 hurt them.",
+		dek: "A three-judge panel vacated the Northern District of California order that had struck Example 4 of the 2022 frame-and-receiver rule. Standing only — not a Second Amendment holding, and not a repeal of California serialization law.",
+		tags: ["ATF", "PMF", "Ninth Circuit", "unfinished frames", "standing"],
+		sources: [
+			{
+				label: "Opinion (9th Cir. Aug. 21, 2026)",
+				url: "https://cdn.ca9.uscourts.gov/datastore/opinions/2026/08/21/24-2701.pdf",
+			},
+			{
+				label: "Ninth Circuit opinions list (filed Aug. 21, 2026)",
+				url: "https://www.ca9.uscourts.gov/decisions/opinions/",
+			},
+			{
+				label: "2022 Final Rule (87 Fed. Reg. 24652) / Example 4",
+				url: "https://www.govinfo.gov/content/pkg/FR-2022-04-26/pdf/2022-08026.pdf",
+			},
+			{
+				label: "Cal. Penal Code § 29180 (official)",
+				url: "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=PEN&sectionNum=29180",
+			},
+		],
+		blocks: [
+			{
+				type: "p",
+				text: "A Ninth Circuit panel has thrown out California and the Giffords Law Center’s attempt to force the Bureau of Alcohol, Tobacco, Firearms and Explosives to treat more unfinished AR-15 receiver billets as Gun Control Act “firearms.” The court did not decide whether Example 4 of the 2022 frame-and-receiver rule is wise, lawful, or too narrow. It held that the plaintiffs never proved Article III standing.",
+			},
+			{
+				type: "p",
+				text: "The opinion in State of California v. U.S. Bureau of Alcohol, Tobacco, Firearms & Explosives, No. 24-2701, was filed August 21, 2026. Judge Consuelo M. Callahan wrote for a panel that also included Judges Holly A. Thomas and Anthony D. Johnstone, on appeal from Judge Edward M. Chen in the Northern District of California (No. 3:20-cv-06761-EMC).",
+			},
+			{
+				type: "quote",
+				text: "We must decide whether Plaintiffs have standing to raise their challenge. They do not.",
+				cite: "Callahan, 9th Cir., Aug. 21, 2026",
+			},
+			{
+				type: "h2",
+				text: "What Example 4 actually says",
+			},
+			{
+				type: "p",
+				text: "ATF’s 2022 Final Rule treats some partially complete frames and receivers — including certain kits that “may readily be completed” — as firearms under 27 C.F.R. § 478.12(c). The same section then gives nonexclusive examples of what is, and is not, a receiver. Example 4 is the carve-out California wanted erased.",
+			},
+			{
+				type: "p",
+				text: "As quoted by the panel from the regulation: a “billet or blank of an AR-15 variant receiver without critical interior areas having been indexed, machined, or formed that is not sold, distributed, or possessed with instructions, jigs, templates, equipment, or tools such that it may readily be completed is not a receiver.” Plaintiffs argued that Example 4 left “obvious and easily navigable loopholes.” They did not ask the court to vacate the entire Final Rule. They wanted it to reach even more early-stage receivers, including items sold without tools.",
+			},
+			{
+				type: "h2",
+				text: "What the district court had done — and what the panel undid",
+			},
+			{
+				type: "p",
+				text: "Judge Chen had found standing, granted the plaintiffs summary judgment on their arbitrary-and-capricious count, declared Example 4 unlawful, vacated it, and remanded the matter to ATF. Callahan’s opinion is explicit that the appeal begins and ends with standing. Because the plaintiffs did not show that Example 4 caused their asserted injuries, the panel never reached the merits. The case goes back with instructions to dismiss without prejudice.",
+			},
+			{ type: "ad" },
+			{
+				type: "h2",
+				text: "Why the standing theory failed",
+			},
+			{
+				type: "p",
+				text: "California said Example 4 forced extra spending to accelerate state ghost-gun legislation and train law enforcement. Giffords said the same gap frustrated its mission and diverted staff time. Both injuries were indirect. When claimed harm depends on how third parties react to the government’s regulation of someone else, standing is “substantially more difficult” to establish.",
+			},
+			{
+				type: "ul",
+				items: [
+					"The evidence spoke to “ghost guns” generally, not to the specific unfinished products Example 4 leaves unregulated.",
+					"Almost all of California’s documented expenditures ran from 2016 through 2022 — before the Final Rule existed — so they cannot be charged to Example 4.",
+					"The one post-rule data point, from Los Angeles County recoveries, showed the share of recovered ghost guns falling after the rule, which the panel called “the opposite trend that California’s theory requires.”",
+					"Giffords’ records had the same two problems: they did not isolate Example 4 products, and nearly all of the documented work predated the rule.",
+				],
+			},
+			{
+				type: "quote",
+				text: "Because California and GLC assert theories that rest on such speculation, neither has standing here. We thus vacate the district court’s order and remand with instructions to dismiss the case for lack of standing.",
+				cite: "Callahan, 9th Cir., Aug. 21, 2026",
+			},
+			{
+				type: "h2",
+				text: "What this is not",
+			},
+			{
+				type: "ul",
+				items: [
+					"Not a Second Amendment decision. The panel never reached the constitutional status of unfinished receivers.",
+					"Not a holding that Example 4 is lawful — or unlawful. The merits were not decided.",
+					"Not a nationwide right to buy every product marketed as an “80% receiver.” Example 4 is fact-specific: no critical interior machining, and not sold, distributed, or possessed with the jigs and tools that make it readily completable.",
+					"Not a repeal of California serialization law. Penal Code §§ 29180–29182 still condition personal manufacture on a DOJ unique serial number.",
+					"Not the Northern District of Texas injunction. Defense Distributed v. Blanche is a different caption, a different theory, and a party- and product-limited order. Do not mash the PDFs together.",
+				],
+			},
+			{
+				type: "p",
+				text: "Dismissal without prejudice means another plaintiff — or these plaintiffs with a different record — could try again. It does not bless Example 4 for all time, and it does not erase the 2022 Final Rule. For people who are not covered by the Texas injunction, §§ 478.11 and 478.12(c) remain in the Code of Federal Regulations as ATF wrote them, including Example 4.",
+			},
+			{
+				type: "cta",
+				title: "California’s map tile did not move",
+				body: "This opinion is about who may sue ATF in federal court, not about whether you need a DOJ serial number before you mill a frame in California. Open the map, then /law/ca, before you treat a standing dismissal as a workshop green light.",
+				href: "/map",
+				label: "Open the PMF map",
+			},
+			{
+				type: "h2",
+				text: "Bottom line",
+			},
+			{
+				type: "p",
+				text: "California wanted ATF to regulate a broader slice of unfinished AR receivers. The Ninth Circuit said the state and Giffords never proved Example 4 caused the injuries they claimed, vacated the order that had struck the example, and sent the case back to be dismissed without prejudice. If you live in California, the map still shows serialization and precursor rules. If you live anywhere else, click your state anyway. Federal standing law is not a travel permit.",
+			},
+			{
+				type: "p",
+				text: "PyreArms is a collective for statute education. This article is not legal advice and does not create an attorney-client relationship.",
+			},
+		],
+	},
+	{
 		slug: "texas-won-headlines-your-state-still-owns-you",
 		date: "August 21, 2026",
 		publishedAt: "2026-08-21",

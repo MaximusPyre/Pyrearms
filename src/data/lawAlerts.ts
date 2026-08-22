@@ -11,6 +11,17 @@ export type LawAlert = {
 /** Homepage / law-page banners. Point to full blog articles. Newest first. */
 export const LAW_ALERTS: LawAlert[] = [
 	{
+		id: "2026-08-ninth-circuit-example-4",
+		date: "August 22, 2026",
+		kicker: "Federal court · 9th Cir.",
+		title:
+			"Ninth Circuit: California lacked standing to expand ATF’s unfinished-receiver example",
+		summary:
+			"California v. ATF, No. 24-2701. Panel vacated the N.D. Cal. order that had struck Example 4 of the 2022 frame/receiver rule. Standing only — not a Second Amendment holding, and not a repeal of California serialization law.",
+		href: "/blog/ninth-circuit-california-lacks-standing-to-expand-atf-receiver-rule",
+		active: true,
+	},
+	{
 		id: "2026-08-state-trap",
 		date: "August 21, 2026",
 		kicker: "Blog · retention",
