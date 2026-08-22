@@ -1,22 +1,7 @@
 import { useEffect } from "react";
 import { HUB_LINKS } from "../data/hubLinks";
+import { hubPing } from "../lib/hubAnalytics";
 import { X_HANDLE } from "../lib/social";
-
-const HUB_BEACON = "https://watch.pyrearms.dev/hub-event";
-
-function hubPing(kind: "view" | "click", link = "_page") {
-	const body = `${kind}:${link}`;
-	try {
-		navigator.sendBeacon(HUB_BEACON, new Blob([body], { type: "text/plain" }));
-	} catch {
-		void fetch(HUB_BEACON, {
-			method: "POST",
-			body,
-			mode: "no-cors",
-			keepalive: true,
-		});
-	}
-}
 
 export function LinkHub() {
 	useEffect(() => {

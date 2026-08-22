@@ -7,6 +7,16 @@ import type { Context } from "hono";
 import { deleteCookie, getCookie, setCookie } from "hono/cookie";
 import type { Env } from "./env.js";
 import {
+	classifyBrowser,
+	classifyCountry,
+	classifyDevice,
+	classifyLanguage,
+	classifyOs,
+	classifyReferrer,
+	clientBrands,
+	bump,
+} from "./classify.js";
+import {
 	loginPage,
 	notFoundPage,
 	playerPage,
@@ -126,7 +136,41 @@ async function listClips(env: Env): Promise<{ id: string; title: string }[]> {
 	return rows.map(({ id, title }) => ({ id, title }));
 }
 
-type HubStats = { views: number; clicks: Record<string, number> };
+type HubRecent = {
+	t: string;
+	kind: "view" | "click";
+	link: string;
+	browser: string;
+	os: string;
+	device: string;
+	country: string;
+	referrer: string;
+	language: string;
+};
+
+type HubStats = {
+	views: number;
+	clicks: Record<string, number>;
+	browsers: Record<string, number>;
+	os: Record<string, number>;
+	devices: Record<string, number>;
+	countries: Record<string, number>;
+	referrers: Record<string, number>;
+	languages: Record<string, number>;
+	recent: HubRecent[];
+};
+
+const emptyCounts = (): Record<string, number> => ({});
+
+function asCountMap(value: unknown): Record<string, number> {
+	if (!value || typeof value !== "object") return emptyCounts();
+	const out: Record<string, number> = {};
+	for (const [k, v] of Object.entries(value as Record<string, unknown>)) {
+		const n = Number(v);
+		if (k && Number.isFinite(n) && n > 0) out[k] = Math.floor(n);
+	}
+	return out;
+}
 
 const HUB_LINK_LABELS: Record<string, string> = {
 	x: "X",
@@ -136,17 +180,61 @@ const HUB_LINK_LABELS: Record<string, string> = {
 	snapchat: "Snapchat",
 };
 
+function emptyHubStats(): HubStats {
+	return {
+		views: 0,
+		clicks: emptyCounts(),
+		browsers: emptyCounts(),
+		os: emptyCounts(),
+		devices: emptyCounts(),
+		countries: emptyCounts(),
+		referrers: emptyCounts(),
+		languages: emptyCounts(),
+		recent: [],
+	};
+}
+
+function asRecent(value: unknown): HubRecent[] {
+	if (!Array.isArray(value)) return [];
+	const out: HubRecent[] = [];
+	for (const row of value) {
+		if (!row || typeof row !== "object") continue;
+		const r = row as Record<string, unknown>;
+		const kind = r.kind === "click" ? "click" : r.kind === "view" ? "view" : "";
+		if (!kind) continue;
+		out.push({
+			t: typeof r.t === "string" ? r.t : "",
+			kind,
+			link: typeof r.link === "string" ? r.link : "",
+			browser: typeof r.browser === "string" ? r.browser : "Other",
+			os: typeof r.os === "string" ? r.os : "Other",
+			device: typeof r.device === "string" ? r.device : "Other",
+			country: typeof r.country === "string" ? r.country : "",
+			referrer: typeof r.referrer === "string" ? r.referrer : "Direct",
+			language: typeof r.language === "string" ? r.language : "",
+		});
+	}
+	return out.slice(0, 40);
+}
+
 async function readHubStats(env: Env): Promise<HubStats> {
 	const obj = await env.VIDEOS.get(HUB_STATS_KEY);
-	if (!obj) return { views: 0, clicks: {} };
+	if (!obj) return emptyHubStats();
 	try {
-		const parsed = JSON.parse(await obj.text()) as HubStats;
+		const parsed = JSON.parse(await obj.text()) as Partial<HubStats>;
 		return {
 			views: Number(parsed.views) || 0,
-			clicks: parsed.clicks && typeof parsed.clicks === "object" ? parsed.clicks : {},
+			clicks: asCountMap(parsed.clicks),
+			browsers: asCountMap(parsed.browsers),
+			os: asCountMap(parsed.os),
+			devices: asCountMap(parsed.devices),
+			countries: asCountMap(parsed.countries),
+			referrers: asCountMap(parsed.referrers),
+			languages: asCountMap(parsed.languages),
+			recent: asRecent(parsed.recent),
 		};
 	} catch {
-		return { views: 0, clicks: {} };
+		return emptyHubStats();
 	}
 }
 
@@ -181,20 +269,112 @@ app.get("/clips", async (c) => {
 app.get("/hub-stats", async (c) => {
 	if (!(await requireSession(c))) return html(loginPage());
 	const stats = await readHubStats(c.env);
-	return html(hubStatsPage(stats.views, stats.clicks, HUB_LINK_LABELS));
+	return html(hubStatsPage(stats, HUB_LINK_LABELS));
 });
 
 app.options("/hub-event", () => new Response(null, { status: 204, headers: hubCors() }));
 
-app.post("/hub-event", async (c) => {
-	const raw = (await c.req.text()).trim();
+type HubPayload = {
+	kind?: string;
+	link?: string;
+	ua?: string;
+	language?: string;
+	languages?: unknown;
+	platform?: string;
+	mobile?: unknown;
+	brands?: unknown;
+	referrer?: string;
+};
+
+function parseHubPayload(raw: string): HubPayload {
+	if (raw.startsWith("{")) {
+		try {
+			const parsed = JSON.parse(raw) as HubPayload;
+			return parsed && typeof parsed === "object" ? parsed : {};
+		} catch {
+			return {};
+		}
+	}
 	const [kind, link] = raw.split(":");
+	return { kind, link };
+}
+
+function hubAllowed(c: Context<{ Bindings: Env }>): boolean {
+	const origin = c.req.header("origin") || "";
+	const referer = c.req.header("referer") || "";
+	return origin === "https://max.pyrearms.dev" || referer.startsWith("https://max.pyrearms.dev/");
+}
+
+function readCfCountry(c: Context<{ Bindings: Env }>): string {
+	const header = c.req.header("cf-ipcountry") || "";
+	const cf = (c.req.raw as Request & { cf?: { country?: string } }).cf;
+	return classifyCountry(cf?.country || header);
+}
+
+app.post("/hub-event", async (c) => {
+	if (!hubAllowed(c)) {
+		return new Response("ok", { headers: hubCors() });
+	}
+	const raw = (await c.req.text()).trim();
+	if (!raw || raw.length > 4096) {
+		return new Response("ok", { headers: hubCors() });
+	}
+	const payload = parseHubPayload(raw);
+	const kind = payload.kind === "click" ? "click" : payload.kind === "view" ? "view" : "";
+	if (!kind) return new Response("ok", { headers: hubCors() });
+
+	const link =
+		typeof payload.link === "string" &&
+		(payload.link in HUB_LINK_LABELS || /^[a-z0-9_-]{1,40}$/i.test(payload.link))
+			? payload.link
+			: "";
+
+	const headerUa = c.req.header("user-agent") || "";
+	const ua = typeof payload.ua === "string" && payload.ua.length < 512 ? payload.ua : headerUa;
+	const brands = clientBrands(payload.brands);
+	const platform = typeof payload.platform === "string" ? payload.platform : "";
+	const mobile = typeof payload.mobile === "boolean" ? payload.mobile : undefined;
+	const browser = classifyBrowser(ua, brands);
+	const os = classifyOs(ua, platform);
+	const device = classifyDevice(ua, mobile);
+	const country = readCfCountry(c);
+	const referrer = classifyReferrer(typeof payload.referrer === "string" ? payload.referrer : "");
+	const language = classifyLanguage(
+		typeof payload.language === "string" && payload.language
+			? payload.language
+			: Array.isArray(payload.languages) && typeof payload.languages[0] === "string"
+				? payload.languages[0]
+				: c.req.header("accept-language") || "",
+	);
+
 	const stats = await readHubStats(c.env);
 	if (kind === "view") {
 		stats.views += 1;
-	} else if (kind === "click" && link && (link in HUB_LINK_LABELS || /^[a-z0-9_-]{1,40}$/i.test(link))) {
+		bump(stats.browsers, browser);
+		bump(stats.os, os);
+		bump(stats.devices, device);
+		if (country) bump(stats.countries, country);
+		bump(stats.referrers, referrer);
+		if (language) bump(stats.languages, language);
+	} else if (link) {
 		stats.clicks[link] = (stats.clicks[link] || 0) + 1;
 	}
+
+	stats.recent = [
+		{
+			t: new Date().toISOString(),
+			kind,
+			link: kind === "click" ? link : "",
+			browser,
+			os,
+			device,
+			country,
+			referrer,
+			language,
+		},
+		...stats.recent,
+	].slice(0, 40);
+
 	await writeHubStats(c.env, stats);
 	return new Response("ok", { headers: hubCors() });
 });
