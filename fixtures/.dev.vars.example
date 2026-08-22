@@ -1,0 +1,9 @@
+# Copy to fixtures/.dev.vars for local `npm run dev:fixtures`.
+# Production secrets: wrangler secret put ... -c fixtures/wrangler.jsonc
+
+FIXTURES_AUTH_MODE=on
+FIXTURES_BASIC_USER=fixtures
+FIXTURES_BASIC_PASSWORD=local-dev-only
+FIXTURES_ACCESS_TOKEN=local-dev-token
+FIXTURES_ALLOW_QUERY_TOKEN=false
+FIXTURES_HOSTNAME=localhost:8788
