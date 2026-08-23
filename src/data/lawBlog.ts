@@ -48,6 +48,129 @@ export function relatedPosts(slug: string, limit = 2) {
 /** Public blog — full articles only. Newest first. No daily “verified” spam. */
 export const BLOG_POSTS: BlogPost[] = [
 	{
+		slug: "illinois-unfinished-frame-ban-survives-texas-injunctions",
+		date: "August 23, 2026",
+		publishedAt: "2026-08-23",
+		title:
+			"Does a Texas ATF injunction let you possess an unfinished receiver in Illinois?",
+		hook: "Illinois wrote its own unfinished-frame crime in 2022. A Fort Worth caption does not repeal it.",
+		dek: "720 ILCS 5/24-5.1 already makes knowing possession, transport, and transfer of unserialized unfinished frames and unserialized firearms a state offense. The Northern District of Texas orders do not rewrite Springfield.",
+		tags: ["Illinois", "PMF", "unfinished frames", "state law", "map"],
+		sources: [
+			{
+				label: "720 ILCS 5/24-5.1 (ILGA official)",
+				url: "https://www.ilga.gov/legislation/ilcs/fulltext?DocName=072000050K24-5.1",
+			},
+			{
+				label: "Frame/receiver opinion (Dkt. 330, RECAP)",
+				url: "https://storage.courtlistener.com/recap/gov.uscourts.txnd.366145/gov.uscourts.txnd.366145.330.0.pdf",
+			},
+			{
+				label: "NFA judgment (Dkt. 137, RECAP)",
+				url: "https://storage.courtlistener.com/recap/gov.uscourts.txnd.406278/gov.uscourts.txnd.406278.137.0_1.pdf",
+			},
+			{
+				label: "Opinion (9th Cir. Aug. 21, 2026)",
+				url: "https://cdn.ca9.uscourts.gov/datastore/opinions/2026/08/21/24-2701.pdf",
+			},
+		],
+		blocks: [
+			{
+				type: "p",
+				text: "The last ten days produced two Northern District of Texas injunctions and a Ninth Circuit standing dismissal. Group chats flattened all three into one sentence: unfinished receivers are fine now. That sentence fails in Illinois before you finish the on-ramp.",
+			},
+			{
+				type: "p",
+				text: "Illinois did not wait for ATF’s 2022 frame-and-receiver rule, and it does not need that rule to charge you. Public Act 102-889 added 720 ILCS 5/24-5.1, effective May 18, 2022. Subsections (c) and (d) — possession, transport, and receipt — began 180 days later. A later technical rewrite, Public Act 103-605, took effect July 1, 2024. None of those session laws mention Defense Distributed, SAF membership, or Silencer Shop customers.",
+			},
+			{
+				type: "h2",
+				text: "What the statute actually forbids",
+			},
+			{
+				type: "ul",
+				items: [
+					"Subsection (b): no knowing sale, offer, or transfer of an unserialized unfinished frame or receiver or unserialized firearm — including 3D-printed items — unless the buyer is a federal importer, manufacturer, or dealer.",
+					"Subsection (c): no knowing possession, transport, or receipt of an unfinished frame or receiver unless you are a federal importer or manufacturer, you are moving it to one, or it is serialized under subsection (f).",
+					"Subsection (d): no knowing possession, purchase, transport, or receipt of a firearm lacking a serial number from a federal importer or manufacturer, or from a licensee authorized to mark under subsection (f), except transfers to a federal importer or manufacturer.",
+				],
+			},
+			{
+				type: "p",
+				text: "Read (c) again. The verbs are possess, transport, or receive. A kit on I-55 is not a federal-only problem. The compiled text reaches movement through the state, not just a workshop in Cook County.",
+			},
+			{
+				type: "h2",
+				text: "“Unfinished” is not yours to define",
+			},
+			{
+				type: "quote",
+				text: "“Unfinished frame or receiver” means any forging, casting, printing, extrusion, machined body, or similar article that: (1) has reached a stage in manufacture where it may readily be completed, assembled, or converted to be a functional firearm; or (2) is marketed or sold to the public to become or be used as the frame or receiver of a functional firearm once completed, assembled, or converted.",
+				cite: "720 ILCS 5/24-5.1(a)",
+			},
+			{
+				type: "p",
+				text: "The second prong is the one people skip. Marketing language is in the statute. “I have not milled the fire-control pocket yet” is not, by itself, an off-ramp if the product was sold to become a frame or receiver.",
+			},
+			{ type: "ad" },
+			{
+				type: "h2",
+				text: "3D printing is named. The 2022 clock is closed.",
+			},
+			{
+				type: "p",
+				text: "Subsection (e) required 3D-printed firearms and unfinished frames to be serialized under subsection (f) within 30 days after May 18, 2022, or before they became readily completable. That window closed in 2022. It is not a hobby exception. “Unserialized” here means no serial number from a federal manufacturer, importer, dealer, or other licensee authorized to mark under federal law or subsection (f).",
+			},
+			{
+				type: "h2",
+				text: "Exceptions are short. Membership is not one of them.",
+			},
+			{
+				type: "p",
+				text: "Subsection (h) carves out items rendered permanently inoperable; antiques under 18 U.S.C. § 921(a)(16); firearms made before October 22, 1968; unfinished frames held by a bona fide supplier exclusively for transfer to a federal manufacturer or importer; and a 30-day inheritance window if the heir is not otherwise prohibited. There is no SAF-member paragraph, no “Texas plaintiff customer” paragraph, and no Example 4 paragraph.",
+			},
+			{
+				type: "h2",
+				text: "Quote the penalty subsection",
+			},
+			{
+				type: "p",
+				text: "A first violation of subsection (c) or (d) is a Class A misdemeanor; a second or subsequent violation is a Class 3 felony. A first violation of the sale-or-transfer ban in subsection (b) is a Class 4 felony; a second or subsequent is a Class 2 felony. First-time possession is not automatically a felony under this section. Sale and transfer are.",
+			},
+			{
+				type: "h2",
+				text: "What the Texas PDFs cover — and what they do not",
+			},
+			{
+				type: "p",
+				text: "Chief Judge Reed O’Connor’s August 17 opinion in VanDerStok / Defense Distributed v. Blanche enjoins ATF from enforcing 27 C.F.R. §§ 478.11 and 478.12(c) against Defense Distributed, SAF, and SAF members — on named Defense Distributed products. Judge James Wesley Hendrix’s August 5 judgment in Silencer Shop Foundation v. ATF (consolidated with Jensen) enjoins specified NFA registration provisions as to untaxed firearms for the plaintiffs and, where the judgment says so, their agencies, members, and customers. Both orders are party-specific. Neither recites 720 ILCS 5/24-5.1.",
+			},
+			{
+				type: "p",
+				text: "Friday’s Ninth Circuit opinion in California v. ATF, No. 24-2701, held only that California and Giffords lacked standing to vacate Example 4 of the federal receiver rule. Standing to sue ATF in San Francisco is not a license to possess an unfinished receiver in Illinois.",
+			},
+			{
+				type: "cta",
+				title: "Illinois is a red tile for a reason",
+				body: "Open the map, click Illinois, then read /law/il against 720 ILCS 5/24-5.1 before you treat a Texas injunction as a travel document.",
+				href: "/map",
+				label: "Open the PMF map",
+			},
+			{
+				type: "h2",
+				text: "Bottom line",
+			},
+			{
+				type: "p",
+				text: "If you live in Illinois, drive through it, or keep an unfinished frame in a bag that might cross a state line, the question is not whether ATF can enforce two C.F.R. sections against someone else in Texas. On the compiled text, knowing possession, transport, and transfer of unserialized unfinished frames and unserialized firearms are state offenses with listed exceptions — and a Fort Worth caption is not one of them. Read the statute. Then click the map.",
+			},
+			{
+				type: "p",
+				text: "PyreArms is a collective for statute education. This article is not legal advice and does not create an attorney-client relationship.",
+			},
+		],
+	},
+	{
 		slug: "ninth-circuit-california-lacks-standing-to-expand-atf-receiver-rule",
 		date: "August 22, 2026",
 		publishedAt: "2026-08-22",
