@@ -48,6 +48,139 @@ export function relatedPosts(slug: string, limit = 2) {
 /** Public blog — full articles only. Newest first. No daily “verified” spam. */
 export const BLOG_POSTS: BlogPost[] = [
 	{
+		slug: "does-zero-nfa-tax-mean-you-skip-form-1-and-form-4",
+		date: "August 24, 2026",
+		publishedAt: "2026-08-24",
+		title: "Does a $0 NFA tax mean you skip Form 1 and Form 4?",
+		hook: "Congress zeroed the stamp. It did not delete the application paragraphs.",
+		dek: "Form 1 is making. Form 4 is transfer. The $0 rates in 26 U.S.C. §§ 5811 and 5821 sit next to approval statutes that still exist. A Texas injunction covers named parties — not everyone, and not 18 U.S.C. § 922(b)(4).",
+		tags: ["NFA", "Form 1", "Form 4", "suppressors", "SBR", "map"],
+		sources: [
+			{
+				label: "26 U.S.C. § 5811 (transfer tax; House prelim.)",
+				url: "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title26-section5811&num=0&edition=prelim",
+			},
+			{
+				label: "26 U.S.C. § 5812 (transfers; House prelim.)",
+				url: "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title26-section5812&num=0&edition=prelim",
+			},
+			{
+				label: "26 U.S.C. § 5821 (making tax)",
+				url: "https://www.law.cornell.edu/uscode/text/26/5821",
+			},
+			{
+				label: "26 U.S.C. § 5822 (making)",
+				url: "https://www.law.cornell.edu/uscode/text/26/5822",
+			},
+			{
+				label: "18 U.S.C. § 922(b)(4)",
+				url: "https://www.law.cornell.edu/uscode/text/18/922",
+			},
+			{
+				label: "ATF $0-tax conforming rule (91 Fed. Reg. 25112)",
+				url: "https://www.govinfo.gov/content/pkg/FR-2026-05-08/pdf/2026-09155.pdf",
+			},
+			{
+				label: "NFA judgment (Dkt. 137, RECAP)",
+				url: "https://storage.courtlistener.com/recap/gov.uscourts.txnd.406278/gov.uscourts.txnd.406278.137.0_1.pdf",
+			},
+		],
+		blocks: [
+			{
+				type: "p",
+				text: "After Congress set the making and transfer taxes on most National Firearms Act items to $0, group chats flattened three documents into one sentence: the paperwork is gone. That sentence mixes a tax-rate amendment, an ATF conforming rule, and a party-specific injunction. The forms are not the tax.",
+			},
+			{
+				type: "p",
+				text: "Form 1 and Form 4 are ATF’s names for two different jobs. Form 1 (ATF Form 5320.1) is the application to make and register an NFA firearm. Form 4 (ATF Form 5320.4) is the application to transfer and register one that already exists. You file Form 1 when you are the maker — shortening a rifle, building a short-barreled shotgun, making a silencer. You file Form 4 when someone else is moving an already-made item to you.",
+			},
+			{
+				type: "h2",
+				text: "What the making statute still says",
+			},
+			{
+				type: "quote",
+				text: "No person shall make a firearm unless he has (a) filed with the Secretary a written application … to make and register the firearm …; (b) paid any tax payable on the making … and (e) obtained the approval of the Secretary to make and register the firearm and the application form shows such approval.",
+				cite: "26 U.S.C. § 5822",
+			},
+			{
+				type: "p",
+				text: "Public Law 119-21, § 70436, rewrote the making tax in 26 U.S.C. § 5821(a): $200 for a machinegun or destructive device, and $0 for any other NFA firearm made. Zero is a rate. It does not repeal the application, fingerprint, photograph, or approval clauses. Applications “shall be denied if the making or possession of the firearm would place the person making the firearm in violation of law” — including state law.",
+			},
+			{
+				type: "h2",
+				text: "What the transfer statute still says",
+			},
+			{
+				type: "quote",
+				text: "A firearm shall not be transferred unless (1) the transferor … has filed … a written application … for the transfer and registration of the firearm to the transferee …; (2) any tax payable on the transfer is paid … and (6) the application form shows that the Secretary has approved the transfer …. The transferee … shall not take possession … unless the Secretary has approved the transfer and registration.",
+				cite: "26 U.S.C. § 5812(a), (b)",
+			},
+			{
+				type: "p",
+				text: "Section 5811(a) now charges $200 to transfer a machinegun or destructive device and $0 to transfer any other NFA firearm. “Any tax payable” can be zero. It still is not a skip of identification, approval, or the ban on taking possession first. Applications are denied if the transfer, receipt, or possession would place the transferee in violation of law.",
+			},
+			{
+				type: "h2",
+				text: "ATF already wrote the $0 rate into Part 479",
+			},
+			{
+				type: "p",
+				text: "ATF published a final rule at 91 Fed. Reg. 25112 amending 27 C.F.R. §§ 479.61, 479.62, 479.81, 479.82, and 479.84 to match the statute. The agency named Form 1 and Form 4 in that document, then said the quiet part:",
+			},
+			{
+				type: "quote",
+				text: "Although ATF is revising its rule to reflect that OBBBA reduced the tax amount for these NFA firearms to $0, all other regulatory provisions of the NFA application and registration process remain in full force and effect.",
+				cite: "91 Fed. Reg. 25112 (May 8, 2026)",
+			},
+			{
+				type: "p",
+				text: "That is a tax-table edit, not a Form 1 / Form 4 holiday. Machineguns and destructive devices still carry the $200 taxes. As of that rule, everything else in the NFA definition still had an application-and-approval process with a $0 stamp.",
+			},
+			{ type: "ad" },
+			{
+				type: "h2",
+				text: "The Texas injunction is a coverage list",
+			},
+			{
+				type: "p",
+				text: "Judge James Wesley Hendrix’s August 5 judgment in Silencer Shop Foundation v. ATF (consolidated with Jensen) permanently enjoins ATF and DOJ from enforcing specified NFA registration provisions — including 26 U.S.C. §§ 5812(a)–(b) and 5822, and 27 C.F.R. §§ 479.62(a)–(d) and 479.84(a)–(d) — as to untaxed firearms against the plaintiffs and, where the judgment says so, their agencies, members, and customers, current and future. The court refused a universal injunction. If you are not in that list, the May rule’s “full force and effect” sentence is still the federal baseline. Hendrix did not rewrite the Gun Control Act, decide the abandoned Second Amendment claims, or repeal state suppressor and short-barrel bans.",
+			},
+			{
+				type: "h2",
+				text: "Dealers still have a different statute for short barrels",
+			},
+			{
+				type: "quote",
+				text: "It shall be unlawful for any licensed importer, licensed manufacturer, licensed dealer, or licensed collector to sell or deliver … to any person any destructive device, machinegun …, short-barreled shotgun, or short-barreled rifle, except as specifically authorized by the Attorney General consistent with public safety and necessity.",
+				cite: "18 U.S.C. § 922(b)(4)",
+			},
+			{
+				type: "p",
+				text: "That paragraph does not list silencers. It does list short-barreled rifles and shotguns. It lives in Title 18, not Title 26, and Hendrix did not enjoin it. Licensee-to-licensee deals are carved out of § 922(b)(1)–(4). For a dealer handing an SBR or SBS to a non-licensee, the GCA still demands Attorney General authorization. A $0 NFA tax is not that authorization.",
+			},
+			{
+				type: "cta",
+				title: "The stamp is federal. The stop is often state.",
+				body: "Form 1 and Form 4 do not repeal a state suppressor or short-barrel ban, and they do not serialize an unfinished frame. Open the map, click your state, then read /law for the tile you actually live on.",
+				href: "/map",
+				label: "Open the PMF map",
+			},
+			{
+				type: "h2",
+				text: "Bottom line",
+			},
+			{
+				type: "p",
+				text: "Making is § 5822 (Form 1). Transfer is § 5812 (Form 4). The 2025 tax change set most stamps to $0 and left the approval paragraphs in the Code. ATF said so in May. A later Texas injunction covers named parties on named NFA provisions. It does not delete § 922(b)(4) for short barrels, and it does not delete your state’s criminal code. Match the form to the verb, then click the map.",
+			},
+			{
+				type: "p",
+				text: "PyreArms is a collective for statute education. This article is not legal advice and does not create an attorney-client relationship.",
+			},
+		],
+	},
+	{
 		slug: "illinois-unfinished-frame-ban-survives-texas-injunctions",
 		date: "August 23, 2026",
 		publishedAt: "2026-08-23",
