@@ -48,6 +48,139 @@ export function relatedPosts(slug: string, limit = 2) {
 /** Public blog — full articles only. Newest first. No daily “verified” spam. */
 export const BLOG_POSTS: BlogPost[] = [
 	{
+		slug: "does-colorado-ffl-serial-let-you-mill-or-3d-print",
+		date: "August 25, 2026",
+		publishedAt: "2026-08-25",
+		title:
+			"Does an FFL serial number let you mill or 3D-print a firearm in Colorado?",
+		hook: "Colorado’s 2024 serialization path is real. The July 1 mill-and-print statute is a different crime.",
+		dek: "C.R.S. § 18-12-111.5 still requires serial numbers. C.R.S. § 18-12-119, effective July 1, 2026, separately bans knowingly manufacturing a firearm or listed component with a 3D printer or CNC mill. A Texas ATF injunction does not rewrite either section.",
+		tags: ["Colorado", "PMF", "3D printing", "CNC", "unfinished frames", "map"],
+		sources: [
+			{
+				label: "HB26-1144 session law (Ch. 94; C.R.S. § 18-12-119)",
+				url: "https://www.leg.colorado.gov/laws/session-laws/HB26-1144/94/download",
+			},
+			{
+				label: "Colorado GA · HB26-1144 (enacted)",
+				url: "https://leg.colorado.gov/bills/hb26-1144",
+			},
+			{
+				label: "SB23-279 session law (Ch. 311; C.R.S. § 18-12-111.5)",
+				url: "https://www.leg.colorado.gov/laws/session-laws/SB23-279/311/download",
+			},
+			{
+				label: "Colorado GA · SB23-279 (enacted)",
+				url: "https://leg.colorado.gov/bills/sb23-279",
+			},
+			{
+				label: "Frame/receiver opinion (Dkt. 330, RECAP)",
+				url: "https://storage.courtlistener.com/recap/gov.uscourts.txnd.366145/gov.uscourts.txnd.366145.330.0.pdf",
+			},
+			{
+				label: "NFA judgment (Dkt. 137, RECAP)",
+				url: "https://storage.courtlistener.com/recap/gov.uscourts.txnd.406278/gov.uscourts.txnd.406278.137.0_1.pdf",
+			},
+		],
+		blocks: [
+			{
+				type: "p",
+				text: "Group chats flattened two Colorado statutes into one sentence: get an FFL to stamp a serial number, then mill or print the frame. That sentence was already wrong in 2024. As of July 1, 2026, it mixes a serialization statute with a separate mill-and-print crime.",
+			},
+			{
+				type: "p",
+				text: "C.R.S. § 18-12-111.5 is the unserialized-firearm and unfinished-frame statute from Senate Bill 23-279, chapter 311. C.R.S. § 18-12-119 is the mill-and-print statute from House Bill 26-1144, chapter 94, approved May 4, 2026. Neither session law mentions Defense Distributed, SAF membership, or Silencer Shop customers.",
+			},
+			{
+				type: "h2",
+				text: "What the 2024 statute already banned",
+			},
+			{
+				type: "quote",
+				text: "A person shall not manufacture or cause to be manufactured, including through the use of a three-dimensional printer, a frame or receiver of a firearm.",
+				cite: "C.R.S. § 18-12-111.5(5)(a)(I)",
+			},
+			{
+				type: "p",
+				text: "That manufacture ban is not a “unless you serialize later” clause. The only listed exception in subsection (5)(a) is a federally licensed firearm manufacturer. Subsection (7) is a licensee imprint pathway for a firearm, frame, or receiver that already exists — and returning the marked item is a transfer that requires a Colorado background check under § 18-12-112.5. It is not a workshop license.",
+			},
+			{
+				type: "h2",
+				text: "Possession of an unfinished frame is its own verb list",
+			},
+			{
+				type: "quote",
+				text: "A person shall not knowingly possess or transport an unfinished frame or receiver; except that it is not an offense if the unfinished frame or receiver is required by federal law to be imprinted with a serial number and has been imprinted with a serial number by a federal firearms licensee pursuant to federal law or subsection (7) of this section.",
+				cite: "C.R.S. § 18-12-111.5(1)(a)",
+			},
+			{
+				type: "p",
+				text: "The unfinished-frame definition in § 18-12-101(1)(l) uses the same two prongs Illinois readers already saw: an article that may readily be completed, assembled, or converted to be used as a frame or receiver, or that is marketed or sold to become one. First-time 111.5 violations are a class 1 misdemeanor; a second or subsequent offense is a class 5 felony. The January 1, 2024 serialization deadline in subsection (5)(b) is closed.",
+			},
+			{
+				type: "h2",
+				text: "What July 1 added — and it names the mill",
+			},
+			{
+				type: "quote",
+				text: "A person shall not knowingly manufacture or produce a firearm or firearm component by means of three-dimensional printing using a three-dimensional printer, CNC milling machine, or similar device.",
+				cite: "C.R.S. § 18-12-119(1)(a)",
+			},
+			{
+				type: "quote",
+				text: "“Three-dimensional printing” or “3-D printing” means additive manufacturing that builds three-dimensional objects by use of a three-dimensional printer or similar device and subtractive manufacturing that creates objects by removing material from a workpiece by use of a CNC milling machine or similar device.",
+				cite: "C.R.S. § 18-12-119(3)(f)",
+			},
+			{
+				type: "p",
+				text: "Read the definition twice. In this section, “three-dimensional printing” is not just a resin printer. The General Assembly defined it to include CNC milling. “Firearm component” means an unfinished frame or receiver, a large-capacity magazine as defined in § 18-12-301, or a rapid-fire device. Subsection (2) limits the section to potentially functional firearms and those components — not prop parts, and not “any other components.”",
+			},
+			{ type: "ad" },
+			{
+				type: "h2",
+				text: "The exceptions are not a hobby clause",
+			},
+			{
+				type: "ul",
+				items: [
+					"A federally licensed firearm manufacturer.",
+					"An instructor or student of an accredited gunsmithing program, or an institution that operates one, when the manufacture is solely for educational instruction inside that program.",
+				],
+			},
+			{
+				type: "p",
+				text: "That is the whole (1)(c) list. SAF membership is not on it. A Texas caption is not on it. An FFL serial number stamped after the fact is not on it. A first 119 offense is a class 1 misdemeanor; a second or subsequent offense is a class 5 felony. Chapter 94 took effect July 1, 2026, and applies to offenses committed on or after that date.",
+			},
+			{
+				type: "h2",
+				text: "What the Texas PDFs cover — and what they do not",
+			},
+			{
+				type: "p",
+				text: "Chief Judge Reed O’Connor’s August 17 opinion in VanDerStok / Defense Distributed v. Blanche enjoins ATF from enforcing 27 C.F.R. §§ 478.11 and 478.12(c) against Defense Distributed, SAF, and SAF members — on named Defense Distributed products. Judge James Wesley Hendrix’s August 5 judgment in Silencer Shop Foundation v. ATF (consolidated with Jensen) enjoins specified NFA registration provisions as to untaxed firearms for the plaintiffs and, where the judgment says so, their agencies, members, and customers. Both orders are party-specific. Neither recites C.R.S. §§ 18-12-111.5 or 18-12-119.",
+			},
+			{
+				type: "cta",
+				title: "Colorado is two statutes, not one headline",
+				body: "Open the map, click Colorado, then read /law/co against § 18-12-111.5 and § 18-12-119 before you treat a Texas injunction — or an FFL serial stamp — as a mill or printer license.",
+				href: "/map",
+				label: "Open the PMF map",
+			},
+			{
+				type: "h2",
+				text: "Bottom line",
+			},
+			{
+				type: "p",
+				text: "If you live in Colorado, or keep a mill or printer there, the question is not whether ATF can enforce two C.F.R. sections against someone else in Texas. Serialization under 111.5(7) does not repeal 119. Unlicensed manufacture of a frame or receiver, including with a 3D printer, was already banned. As of July 1, 2026, knowingly producing a firearm or listed component with a 3D printer, CNC mill, or similar device is a separate offense. Read both session laws. Then click the map.",
+			},
+			{
+				type: "p",
+				text: "PyreArms is a collective for statute education. This article is not legal advice and does not create an attorney-client relationship.",
+			},
+		],
+	},
+	{
 		slug: "does-zero-nfa-tax-mean-you-skip-form-1-and-form-4",
 		date: "August 24, 2026",
 		publishedAt: "2026-08-24",
