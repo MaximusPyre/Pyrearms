@@ -206,6 +206,61 @@ export function urgentActionPage(): string {
 </main>`;
 }
 
+export function fingerprintPage(): string {
+	return `<header class="topbar catalog">
+  <a class="brand" href="/">
+    <img src="/assets/logo.svg" alt="" width="36" height="36">
+    <span>
+      <strong>Harborline</strong>
+      <small>Fingerprint lab</small>
+    </span>
+  </a>
+  <nav class="top-links">
+    <a href="/">Catalog</a>
+  </nav>
+</header>
+<main class="catalog-wrap fp-wrap">
+  <h1>Browser fingerprint</h1>
+  <p class="lede">This page measures what this browser looks like to a site. Collection stays in this tab. Snapshots are not sent to the server, logged, or stored remotely. Use it to compare your everyday browser with the sandbox.</p>
+  <ol class="fp-steps">
+    <li>Open this page in your everyday browser. Click <strong>Copy snapshot</strong>.</li>
+    <li>Open this page in the sandbox browser. Paste that snapshot and click <strong>Compare</strong>.</li>
+    <li>A matching hash means the sandbox looks the same. Differing keys mean isolation is changing the fingerprint.</li>
+  </ol>
+  <section class="card">
+    <p class="eyebrow">This browser</p>
+    <p class="fp-hash" data-fp-hash>Collecting…</p>
+    <p class="fine" data-fp-status></p>
+    <div class="btn-row">
+      <button type="button" class="btn primary" data-fp-copy>Copy snapshot</button>
+      <button type="button" class="btn" data-fp-record>Record in this browser</button>
+      <button type="button" class="btn" data-fp-refresh>Recollect</button>
+    </div>
+  </section>
+  <section class="card">
+    <p class="eyebrow">Compare</p>
+    <p class="lede">Paste a snapshot copied from the other browser. Nothing is uploaded.</p>
+    <textarea data-fp-paste rows="8" placeholder='{"hash":"...","components":{...}}'></textarea>
+    <div class="btn-row">
+      <button type="button" class="btn primary" data-fp-compare>Compare</button>
+    </div>
+    <div data-fp-result></div>
+  </section>
+  <section class="card">
+    <p class="eyebrow">Recorded in this browser only</p>
+    <p class="lede">Uses localStorage in this profile. It does not travel to the sandbox or to the server.</p>
+    <div data-fp-history></div>
+  </section>
+  <section class="card">
+    <p class="eyebrow">Components</p>
+    <table class="fp-table">
+      <thead><tr><th>Signal</th><th>Value</th></tr></thead>
+      <tbody data-fp-rows></tbody>
+    </table>
+  </section>
+</main>`;
+}
+
 export function discardedPage(): string {
 	return `<header class="topbar">
   <a class="brand" href="/">

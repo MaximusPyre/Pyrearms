@@ -5,6 +5,7 @@ export type PageOptions = {
 	body: string;
 	redirectTo?: string;
 	redirectSeconds?: number;
+	extraScripts?: string[];
 };
 
 export function renderPage(options: PageOptions): string {
@@ -36,6 +37,10 @@ export function renderPage(options: PageOptions): string {
 <!-- TEST FIXTURE: simulation page only. Form values are discarded locally and never stored, logged, or transmitted. -->
 ${options.body}
 <script src="/assets/fixtures.js"></script>
+${(options.extraScripts || [])
+	.filter((src) => src.startsWith("/assets/"))
+	.map((src) => `<script src="${src}"></script>`)
+	.join("\n")}
 </body>
 </html>`;
 }

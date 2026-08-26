@@ -2,6 +2,7 @@ import { renderPage } from "./layout.ts";
 import {
 	accountVerificationPage,
 	discardedPage,
+	fingerprintPage,
 	loginPage,
 	paymentUpdatePage,
 	sessionExpiredPage,
@@ -16,6 +17,8 @@ export type FixtureDefinition = {
 	signals: string[];
 	redirectTo?: string;
 	redirectSeconds?: number;
+	hasPostForm?: boolean;
+	extraScripts?: string[];
 	bodyClass: string;
 	render: () => string;
 };
@@ -72,6 +75,17 @@ export const FIXTURES: FixtureDefinition[] = [
 		redirectSeconds: 8,
 		render: urgentActionPage,
 	},
+	{
+		id: "fingerprint",
+		path: "/fingerprint",
+		title: "Browser fingerprint",
+		summary: "Local fingerprint lab: record this browser and compare it with a snapshot from another browser.",
+		signals: ["fingerprint", "local-only", "compare"],
+		bodyClass: "page-fingerprint",
+		hasPostForm: false,
+		extraScripts: ["/assets/fingerprint.js"],
+		render: fingerprintPage,
+	},
 ];
 
 export function renderFixture(fixture: FixtureDefinition): string {
@@ -82,6 +96,7 @@ export function renderFixture(fixture: FixtureDefinition): string {
 		body: fixture.render(),
 		redirectTo: fixture.redirectTo,
 		redirectSeconds: fixture.redirectSeconds,
+		extraScripts: fixture.extraScripts,
 	});
 }
 

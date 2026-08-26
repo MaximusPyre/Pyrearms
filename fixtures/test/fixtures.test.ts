@@ -131,7 +131,9 @@ test("every fixture page carries robots meta, root marker, and only local URLs",
 		const html = renderFixture(fixture);
 		assert.match(html, /<html lang="en" data-test-fixture="true"/);
 		assert.match(html, /<meta name="robots" content="noindex,nofollow,noarchive">/);
-		assert.match(html, /<form[\s\S]*method="post"/i);
+		if (fixture.hasPostForm !== false) {
+			assert.match(html, /<form[\s\S]*method="post"/i);
+		}
 		assert.doesNotMatch(html, thirdParty);
 		assert.doesNotMatch(html, remoteHost);
 		const res = await get(fixture.path, {
@@ -183,4 +185,20 @@ test("catalog payload documents discard behavior", () => {
 	const payload = catalogPayload("test-fixtures.pyrearms.dev");
 	assert.match(payload.dataHandling, /never stored/i);
 	assert.equal(payload.fixtures.length, FIXTURES.length);
+});
+
+test("fingerprint lab is local-only and listed in the catalog", async () => {
+	const fixture = FIXTURES.find((row) => row.id === "fingerprint");
+	assert.ok(fixture);
+	assert.equal(fixture.path, "/fingerprint");
+	assert.equal(fixture.hasPostForm, false);
+	const html = renderFixture(fixture);
+	assert.match(html, /src="\/assets\/fingerprint.js"/);
+	assert.doesNotMatch(html, /<form/i);
+	assert.doesNotMatch(html, /(?:href|src|action)\s*=\s*["'](?:https?:)?\/\//i);
+	const res = await get("/fingerprint", {
+		headers: { Authorization: "Bearer tok_123" },
+	});
+	assert.equal(res.status, 200);
+	assert.match(await res.text(), /Browser fingerprint/);
 });

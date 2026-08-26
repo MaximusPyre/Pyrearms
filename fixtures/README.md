@@ -54,6 +54,18 @@ If auth is `on` and neither password nor token is set, the Worker returns `503` 
 
 The catalog at `/` and `GET /catalog.json` pick up new entries automatically.
 
+## Fingerprint lab
+
+`/fingerprint` measures this browser locally (UA, screen, canvas, WebGL, audio, fonts, WebRTC host candidates). It never uploads the snapshot.
+
+To compare the sandbox with your everyday browser:
+
+1. Open `/fingerprint` in the everyday browser → **Copy snapshot**.
+2. Open `/fingerprint` in the sandbox → paste → **Compare**.
+3. Matching hash means the sandbox looks the same. Differing keys are the isolation delta.
+
+**Record in this browser** only writes `localStorage` in that profile. It is not a cross-browser store.
+
 ## Fixture guarantees
 
 - `<html data-test-fixture="true">` and `<meta name="robots" content="noindex,nofollow,noarchive">`
