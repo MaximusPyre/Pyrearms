@@ -48,6 +48,126 @@ export function relatedPosts(slug: string, limit = 2) {
 /** Public blog — full articles only. Newest first. No daily “verified” spam. */
 export const BLOG_POSTS: BlogPost[] = [
 	{
+		slug: "if-silencers-are-arms-can-you-skip-nfa-registration",
+		date: "August 26, 2026",
+		publishedAt: "2026-08-26",
+		title: "If the Fifth Circuit says silencers are Arms, can you skip NFA registration?",
+		hook: "Arms is a constitutional label. Section 5861(d) is still a criminal statute.",
+		dek: "United States v. Comeaux held silencers are Second Amendment Arms — then affirmed a conviction for possessing unregistered ones. The Texas NFA injunction is a different caption, a different theory, and a coverage list.",
+		tags: ["NFA", "suppressors", "Fifth Circuit", "Second Amendment", "map"],
+		sources: [
+			{
+				label: "Opinion (5th Cir. June 18, 2026) — official PDF",
+				url: "https://www.ca5.uscourts.gov/opinions/pub/24/24-30307-CR0.pdf",
+			},
+			{
+				label: "Opinion (RECAP / CourtListener)",
+				url: "https://storage.courtlistener.com/recap/gov.uscourts.ca5.219201/gov.uscourts.ca5.219201.132.1.pdf",
+			},
+			{
+				label: "26 U.S.C. § 5861 (House prelim.)",
+				url: "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title26-section5861&num=0&edition=prelim",
+			},
+			{
+				label: "26 U.S.C. § 5845 (House prelim.)",
+				url: "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title26-section5845&num=0&edition=prelim",
+			},
+			{
+				label: "NFA judgment (Dkt. 137, RECAP)",
+				url: "https://storage.courtlistener.com/recap/gov.uscourts.txnd.406278/gov.uscourts.txnd.406278.137.0_1.pdf",
+			},
+		],
+		blocks: [
+			{
+				type: "p",
+				text: "Group chats mashed two Fifth Circuit-region documents into one sentence: silencers are Arms, so the National Firearms Act is gone. That sentence mixes a published criminal affirmance with a party-specific civil injunction. They answer different questions.",
+			},
+			{
+				type: "p",
+				text: "United States v. Comeaux, No. 24-30307, was filed June 18, 2026. Judge Jerry E. Smith wrote for a panel that also included Judges Edith Brown Clement and Stuart Kyle Duncan, on appeal from the Western District of Louisiana (No. 6:23-CR-183-1). Brennan James Comeaux entered a conditional guilty plea to possessing unregistered silencers after ATF concluded the seized devices were consistent with a device for silencing, muffling, or diminishing the report of a portable firearm. He admitted manufacturing and possessing them. He reserved a Second Amendment challenge. The panel affirmed the conviction.",
+			},
+			{
+				type: "h2",
+				text: "What the panel actually held",
+			},
+			{
+				type: "quote",
+				text: "Though silencers are Second Amendment “Arms,” Comeaux has not alleged that the National Firearms Act’s (“NFA”) shall-issue regime has been put toward abusive ends. Because Peterson controls, he has therefore not shown that his Second Amendment rights have been violated. We affirm.",
+				cite: "Smith, 5th Cir., June 18, 2026",
+			},
+			{
+				type: "p",
+				text: "That is two holdings, not one. First, silencers are Arms — not assumed for argument. The panel said they “facilitate armed self-defense” and serve “critical functions that make firearms both safer and more effective for their core lawful purpose of self-defense.” Second, 26 U.S.C. § 5861(d) still stood on this record. A constitutional label is not a skip of the registration crime.",
+			},
+			{
+				type: "h2",
+				text: "The criminal statute did not move",
+			},
+			{
+				type: "quote",
+				text: "It is “unlawful for any person” “to receive or possess a firearm which is not registered to him in the National Firearms Registration and Transfer Record.”",
+				cite: "26 U.S.C. § 5861(d), as quoted in Comeaux",
+			},
+			{
+				type: "p",
+				text: "The NFA’s definition of “firearm” still includes a silencer. 26 U.S.C. § 5845(a)(7). Comeaux’s footnote 3 notes that the making tax has since been decreased to $0. The panel did not treat a zero rate as a repeal of registration, and it did not decide the Article I taxing-power theory that Silencer Shop Foundation v. ATF later used in a different caption.",
+			},
+			{
+				type: "h2",
+				text: "Why Peterson closed Bruen Step 1",
+			},
+			{
+				type: "p",
+				text: "While Comeaux’s appeal was pending, United States v. Peterson, 161 F.4th 331 (5th Cir. 2025), cert. denied, 224 L. Ed. 2d 501 (2026), treated the NFA’s shall-issue silencer-registration regime as “presumptively lawful” unless a claimant shows the system “has been ‘put toward abusive ends’ through ‘exorbitant fees’ or ‘lengthy wait times in processing license applications.’” Comeaux, the panel said, failed the same way Peterson did: he claimed he wanted silencers for self-defense, but he did not allege abusive fees or wait times, and the record did not show the NFA had effectively denied him the right. The challenge died at Bruen Step 1. The panel never reached a history-and-tradition analysis of the NFA.",
+			},
+			{ type: "ad" },
+			{
+				type: "h2",
+				text: "The concurrence is not a stay",
+			},
+			{
+				type: "p",
+				text: "Judge Clement, joined by Judge Duncan, concurred in the judgment and wrote separately. She agreed silencers are Arms. She also said Peterson “ought to be revisited” because it overread Bruen’s footnote 9 — a comment about state shall-issue carry licenses in a case that did not decide the NFA — into a “half-step” between Bruen’s two steps. That is a published invitation to the en banc court. It is not a holding that registration is enjoined, and it is not a mandate that ATF stop processing Form 1 and Form 4.",
+			},
+			{
+				type: "h2",
+				text: "Do not mash this PDF with Fort Worth",
+			},
+			{
+				type: "p",
+				text: "Judge James Wesley Hendrix’s August 5, 2026 judgment in Silencer Shop Foundation v. ATF (consolidated with Jensen) permanently enjoins specified NFA registration provisions as to untaxed firearms against named plaintiffs and, where the judgment says so, their agencies, members, and customers, current and future. That case is civil. The theory is Congress’s taxing power after Public Law 119-21 zeroed most making and transfer taxes. Hendrix refused a universal injunction. The Second Amendment claims in that case were dismissed without prejudice as abandoned.",
+			},
+			{
+				type: "ul",
+				items: [
+					"Comeaux is a criminal appeal of one man’s § 5861(d) conviction. The government won. It does not put you on Hendrix’s coverage list.",
+					"Named organizational plaintiffs people can join independently appear in the Texas judgment — among others, Gun Owners of America (gunowners.org/join) and Gun Owners Foundation — not in Comeaux. Do not invent extra groups from a criminal caption.",
+					"Commercial plaintiffs whose customers the Texas order mentions (Silencer Shop Foundation and named industry parties) are also a Silencer Shop list, with the court’s transaction-specific limits.",
+					"State suppressor bans, ordinary GCA dealer rules, and Form 4473 background checks where they apply were not rewritten by either PDF.",
+				],
+			},
+			{
+				type: "cta",
+				title: "The caption is federal. The stop is often state.",
+				body: "A Fifth Circuit Arms holding does not repeal a state suppressor ban, and a Texas coverage list does not serialize an unfinished frame. Open the map, click your state, then match the statute you actually live under.",
+				href: "/map",
+				label: "Open the PMF map",
+			},
+			{
+				type: "h2",
+				text: "Bottom line",
+			},
+			{
+				type: "p",
+				text: "The Fifth Circuit said silencers are Arms. It also affirmed a conviction for possessing unregistered ones because, under Peterson, a shall-issue NFA challenge fails unless the record shows abusive fees or wait times. A later Texas civil injunction covers named parties on a taxing-power theory. Those PDFs do not cancel each other, and neither one rewrites your state’s criminal code. Match the caption to the theory. Then click the map.",
+			},
+			{
+				type: "p",
+				text: "PyreArms is a collective for statute education. This article is not legal advice and does not create an attorney-client relationship.",
+			},
+		],
+	},
+	{
 		slug: "does-colorado-ffl-serial-let-you-mill-or-3d-print",
 		date: "August 25, 2026",
 		publishedAt: "2026-08-25",
