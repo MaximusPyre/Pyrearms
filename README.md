@@ -28,6 +28,8 @@ See [docs/PROTOCOL.md](docs/PROTOCOL.md) and [docs/OPSEC.md](docs/OPSEC.md).
 
 Live site: **https://pyrearms.dev** (also `www.pyrearms.dev`)
 
+Host directory: **https://hub.pyrearms.dev** — add new subdomains in [`src/data/pyreHosts.ts`](src/data/pyreHosts.ts)
+
 Private classification fixtures: **https://test-fixtures.pyrearms.dev** — see [fixtures/README.md](fixtures/README.md)
 
 ```bash
@@ -40,6 +42,7 @@ npm run db:migrate:remote
 npm run deploy
 npm run deploy:watch
 npm run deploy:fixtures
+npm run deploy:hub
 ```
 
 `GET /api/connect` may list **iroh endpoint IDs only** so peers can find a live bootstrap host. It is **not required** when using share codes.

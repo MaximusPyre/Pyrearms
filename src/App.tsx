@@ -12,6 +12,7 @@ import { Legal } from "./pages/Legal";
 import { StateMapPage } from "./pages/StateMapPage";
 import { StateLaw } from "./pages/StateLaw";
 import { LinkHub } from "./pages/LinkHub";
+import { SitesHub } from "./pages/SitesHub";
 import "./index.css";
 
 function isLinkHubHost() {
@@ -46,6 +47,8 @@ export default function App() {
 							element={<BodycamsPennsylvania />}
 						/>
 						<Route path="/admin" element={<AdminConnect />} />
+						<Route path="/sites" element={<SitesHub />} />
+						<Route path="/hosts" element={<Navigate to="/sites" replace />} />
 						<Route path="/files" element={<Navigate to="/download" replace />} />
 						<Route path="/kits" element={<Navigate to="/download" replace />} />
 						<Route path="*" element={<Navigate to="/" replace />} />
