@@ -48,6 +48,123 @@ export function relatedPosts(slug: string, limit = 2) {
 /** Public blog — full articles only. Newest first. No daily “verified” spam. */
 export const BLOG_POSTS: BlogPost[] = [
 	{
+		slug: "does-nj-ban-firearm-cad-files-or-only-the-print",
+		date: "August 27, 2026",
+		publishedAt: "2026-08-27",
+		title: "Does New Jersey ban keeping firearm CAD files, or only printing them?",
+		hook: "The 2018 statute already covered the printer and the upload. The 2026 chapter added possession with intent.",
+		dek: "P.L. 2025, c. 255 added N.J.S. 2C:39-3(o): unlicensed knowing possession of firearm digital instructions with intent to manufacture a firearm is a fourth-degree crime. It did not repeal the 2018 third-degree print-and-distribute offenses, and a Texas ATF injunction does not rewrite Title 2C.",
+		tags: ["New Jersey", "PMF", "3D printing", "digital files", "map"],
+		sources: [
+			{
+				label: "P.L. 2025, c. 255 (official session law)",
+				url: "https://pub.njleg.state.nj.us/Bills/2024/AL25/255_.PDF",
+			},
+			{
+				label: "NJ Legislature · A4975 (enacted as P.L. 2025, c. 255)",
+				url: "https://www.njleg.state.nj.us/bill-search/2024/A4975",
+			},
+			{
+				label: "P.L. 2018, c. 138 (N.J.S. 2C:39-9(l))",
+				url: "https://pub.njleg.state.nj.us/Bills/2018/AL18/138_.PDF",
+			},
+			{
+				label: "Frame/receiver opinion (Dkt. 330, RECAP)",
+				url: "https://storage.courtlistener.com/recap/gov.uscourts.txnd.366145/gov.uscourts.txnd.366145.330.0.pdf",
+			},
+			{
+				label: "NFA judgment (Dkt. 137, RECAP)",
+				url: "https://storage.courtlistener.com/recap/gov.uscourts.txnd.406278/gov.uscourts.txnd.406278.137.0_1.pdf",
+			},
+		],
+		blocks: [
+			{
+				type: "p",
+				text: "Group chats flattened three New Jersey verbs into one sentence: CAD files are illegal now. That sentence mixes a 2018 manufacture-and-distribute crime with a 2026 possession-with-intent chapter. The printer, the upload, and the hard drive are not the same offense.",
+			},
+			{
+				type: "p",
+				text: "P.L. 2018, c. 138 added N.J.S. 2C:39-9(l). P.L. 2025, c. 255 — Assembly Bill A4975 (Second Reprint) — was approved January 12, 2026, and took effect immediately. It amended N.J.S. 2C:39-1 and 2C:39-3. Neither session law mentions Defense Distributed, SAF membership, or Silencer Shop customers.",
+			},
+			{
+				type: "h2",
+				text: "What 2018 already made a third-degree crime",
+			},
+			{
+				type: "quote",
+				text: "It is a third degree crime for: (1) a person who is not registered or licensed to do so as a manufacturer as provided in chapter 58 of Title 2C of the New Jersey Statutes, to use a three-dimensional printer or similar device to manufacture or produce a firearm, firearm receiver, magazine, or firearm component; or (2) a person to distribute by any means, including the Internet, to a person in New Jersey who is not registered or licensed as a manufacturer as provided in chapter 58 of Title 2C of the New Jersey Statutes, digital instructions in the form of computer-aided design files or other code or instructions stored and displayed in electronic format as a digital model that may be used to program a three-dimensional printer to manufacture or produce a firearm, firearm receiver, magazine, or firearm component.",
+				cite: "N.J.S. 2C:39-9(l), as added by P.L. 2018, c. 138",
+			},
+			{
+				type: "p",
+				text: "Two tracks, already. Using the printer — or a “similar device” — without a chapter 58 manufacturer license. Or distributing the files to an unlicensed person in New Jersey. “Distribute” in that subsection includes selling, giving, mailing, publishing, sharing, advertising, or making the files available via the Internet, whether for pecuniary gain or not, and includes an agreement or attempt. A Texas caption is not on that list.",
+			},
+			{
+				type: "h2",
+				text: "What January 12 added — possession plus intent",
+			},
+			{
+				type: "quote",
+				text: "“Firearm digital instructions” means digital instructions in the form of computer-aided design files or other code or instructions stored and displayed in electronic format as a digital model that may be used to program a three-dimensional printer to manufacture or produce a firearm, firearm receiver, magazine, or firearm component.",
+				cite: "N.J.S. 2C:39-1(oo), as added by P.L. 2025, c. 255",
+			},
+			{
+				type: "quote",
+				text: "A person who is not licensed or registered to manufacture firearms and knowingly possesses firearm digital instructions as defined in subsection oo. of N.J.S.2C:39-1 with the intent to manufacture a firearm is guilty of a crime of the fourth degree.",
+				cite: "N.J.S. 2C:39-3(o), as added by P.L. 2025, c. 255",
+			},
+			{
+				type: "p",
+				text: "Read the intent clause twice. The enacted subsection does not stop at “knowingly possesses.” The Assembly Appropriations Committee added “with the intent to manufacture a firearm” on March 20, 2025; the introduced bill did not require that element. Do not flatten the definition into the mens rea: (oo) describes files that may program a printer to produce a firearm, receiver, magazine, or component; the possession crime’s intent element, as enacted, is “to manufacture a firearm.”",
+			},
+			{ type: "ad" },
+			{
+				type: "h2",
+				text: "The exception is a New Jersey manufacturer license, not a Texas coverage list",
+			},
+			{
+				type: "p",
+				text: "Both crimes carve out a person licensed or registered to manufacture firearms. 2C:39-9(l) points at chapter 58 of Title 2C — a New Jersey scheme, not SAF membership, and not “customers, current and future” of a named commercial plaintiff. N.J.S. 2C:39-1(j) defines “manufacturer” as a person who receives raw materials or parts and processes them into firearms or finished parts, with a listed exception for exclusive processing of grips, stocks, and other nonmetal parts. An FFL serial stamp is not a silent rewrite of chapter 58.",
+			},
+			{
+				type: "h2",
+				text: "A Texas caption is not a New Jersey defense",
+			},
+			{
+				type: "p",
+				text: "Chief Judge Reed O’Connor’s August 17 VanDerStok / Defense Distributed v. Blanche opinion enjoins ATF from enforcing 27 C.F.R. §§ 478.11 and 478.12(c) against Defense Distributed, SAF, and SAF members — on named Defense Distributed products. Judge James Wesley Hendrix’s August 5 Silencer Shop Foundation v. ATF judgment (consolidated with Jensen) enjoins specified NFA registration provisions as to untaxed firearms for named plaintiffs and, where it says so, their agencies, members, and customers. Both orders are party-specific. Neither recites N.J.S. 2C:39-3(o) or 2C:39-9(l).",
+			},
+			{
+				type: "ul",
+				items: [
+					"Unlicensed 3D manufacture of a firearm, receiver, magazine, or component was already a third-degree crime under 2C:39-9(l)(1). The 2026 chapter did not delete it.",
+					"Distributing those digital instructions to an unlicensed person in New Jersey was already a third-degree crime under 2C:39-9(l)(2), including by Internet.",
+					"Knowingly possessing a firearm assembled on a frame or receiver that is not imprinted with a serial number registered with a federally licensed manufacturer remains a third-degree crime under 2C:39-3(n).",
+					"Knowingly possessing a firearm silencer remains a fourth-degree crime under 2C:39-3(c). Hendrix’s NFA injunction does not repeal that subsection.",
+				],
+			},
+			{
+				type: "cta",
+				title: "New Jersey is Title 2C, not a Fort Worth caption",
+				body: "Open the map, click New Jersey, then read /law/nj against 2C:39-3(o) and 2C:39-9(l) before you treat a Texas injunction — or a folder of STL files — as a printer license.",
+				href: "/map",
+				label: "Open the PMF map",
+			},
+			{
+				type: "h2",
+				text: "Bottom line",
+			},
+			{
+				type: "p",
+				text: "If you live in New Jersey, or keep a printer and a file there, the question is not whether ATF can enforce two C.F.R. sections against someone else in Texas. Unlicensed 3D manufacture and distribution of printable firearm code were already third-degree crimes. As of January 12, 2026, unlicensed knowing possession of those digital instructions with intent to manufacture a firearm is a separate fourth-degree crime. Read both session laws. Then click the map.",
+			},
+			{
+				type: "p",
+				text: "PyreArms is a collective for statute education. This article is not legal advice and does not create an attorney-client relationship.",
+			},
+		],
+	},
+	{
 		slug: "if-silencers-are-arms-can-you-skip-nfa-registration",
 		date: "August 26, 2026",
 		publishedAt: "2026-08-26",
