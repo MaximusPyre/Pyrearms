@@ -133,7 +133,6 @@ const HUB_LINK_LABELS: Record<string, string> = {
 	pyrearms: "PyreArms",
 	sparks: "Sparks",
 	onlyfans: "OnlyFans",
-	tiktok: "TikTok",
 	snapchat: "Snapchat",
 };
 
