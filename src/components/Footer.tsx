@@ -16,6 +16,8 @@ export function Footer() {
 				<Link to="/law">Federal law</Link>
 				<Link to="/blog">Blog</Link>
 				<Link to="/download">Download PyreLink</Link>
+				<Link to="/sites">Host directory</Link>
+				<a href="https://hub.pyrearms.dev">hub.pyrearms.dev</a>
 				<a href="https://desk.manticore.technology/">Manticore Desk</a>
 				<a
 					href="https://www.atf.gov/firearms/privately-made-firearms"

@@ -36,3 +36,13 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: b7b3bc3bf5df1b60ee9b9aaeac93f66c
+      - run: npm run test:fixtures
+      - run: npm run deploy:fixtures
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: b7b3bc3bf5df1b60ee9b9aaeac93f66c
+      - run: npm run test:hub
+      - run: npm run deploy:hub
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: b7b3bc3bf5df1b60ee9b9aaeac93f66c
